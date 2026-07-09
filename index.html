@@ -10,332 +10,139 @@
       --primary-dark: #084a9b;
       --primary-soft: #eaf3ff;
       --blue-50: #eff6ff;
-      --blue-100: #dbeafe;
-      --sky: #38bdf8;
-      --success: #16a34a;
-      --warning: #f59e0b;
-      --danger: #dc2626;
       --text: #172033;
       --muted: #64748b;
       --border: #e2e8f0;
-      --bg: #f8fafc;
+      --bg: #f4f7fb;
       --card: #ffffff;
-      --shadow-sm: 0 4px 6px -1px rgba(15, 99, 201, 0.05);
-      --shadow: 0 10px 25px -5px rgba(15, 99, 201, 0.1);
+      --shadow-sm: 0 2px 12px rgba(15, 99, 201, 0.06);
+      --shadow: 0 12px 30px rgba(15, 99, 201, 0.12);
       --radius: 16px;
     }
 
-    * {
-      box-sizing: border-box;
-      margin: 0;
-      padding: 0;
-      font-family: 'Inter', system-ui, -apple-system, sans-serif;
-    }
+    * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', system-ui, sans-serif; }
 
     body {
       min-height: 100vh;
       color: var(--text);
       background: var(--bg);
       background-image: 
-        radial-gradient(circle at top left, rgba(56, 189, 248, 0.15), transparent 30rem),
-        radial-gradient(circle at top right, rgba(15, 99, 201, 0.1), transparent 30rem);
-      background-attachment: fixed;
+        radial-gradient(circle at top left, rgba(56, 189, 248, 0.1), transparent 40rem),
+        radial-gradient(circle at top right, rgba(15, 99, 201, 0.08), transparent 40rem);
       -webkit-font-smoothing: antialiased;
     }
 
-    /* ================= LAYOUT UTAMA ================= */
-    .app {
-      display: grid;
-      grid-template-columns: 280px 1fr;
-      min-height: 100vh;
-    }
+    .app { display: grid; grid-template-columns: 280px 1fr; min-height: 100vh; }
 
-    .sidebar {
-      background: linear-gradient(180deg, var(--primary), var(--primary-dark));
-      color: #fff;
-      padding: 30px 24px;
-      position: sticky;
-      top: 0;
-      height: 100vh;
-      overflow-y: auto;
-      z-index: 20;
-    }
-
-    .brand {
-      display: flex;
-      gap: 16px;
-      align-items: center;
-      margin-bottom: 36px;
-    }
-
-    .brand-logo {
-      width: 50px;
-      height: 50px;
-      border-radius: 14px;
-      display: grid;
-      place-items: center;
-      background: rgba(255, 255, 255, 0.2);
-      border: 1px solid rgba(255, 255, 255, 0.3);
-      font-size: 24px;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-    }
-
-    .brand h1 {
-      font-size: 16px;
-      line-height: 1.3;
-      letter-spacing: 0.2px;
-      font-weight: 700;
-    }
-
-    .brand p {
-      font-size: 11px;
-      opacity: 0.8;
-      margin-top: 4px;
-    }
-
-    .nav-item {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      padding: 14px 16px;
-      border-radius: 12px;
-      color: rgba(255, 255, 255, 0.9);
-      background: rgba(255, 255, 255, 0.15);
-      font-weight: 600;
-      font-size: 14px;
-      margin-bottom: 8px;
-    }
-
-    .sidebar-note {
-      margin-top: 36px;
-      padding: 16px;
-      border-radius: 12px;
-      background: rgba(255, 255, 255, 0.1);
-      border: 1px solid rgba(255, 255, 255, 0.15);
-    }
+    /* SIDEBAR */
+    .sidebar { background: linear-gradient(180deg, var(--primary), var(--primary-dark)); color: #fff; padding: 32px 24px; position: sticky; top: 0; height: 100vh; overflow-y: auto; z-index: 20; box-shadow: 4px 0 24px rgba(0,0,0,0.1); }
+    .brand { display: flex; gap: 14px; align-items: center; margin-bottom: 40px; }
+    
+    /* LOGO BARU */
+    .brand-logo-img { width: 56px; height: 56px; border-radius: 14px; object-fit: contain; background: #fff; padding: 2px; box-shadow: 0 8px 16px rgba(0,0,0,0.15); }
+    
+    .brand h1 { font-size: 16px; line-height: 1.3; font-weight: 800; letter-spacing: 0.2px; }
+    .brand p { font-size: 12px; opacity: 0.8; margin-top: 4px; font-weight: 500; }
+    
+    .nav-item { display: flex; align-items: center; gap: 12px; padding: 14px 16px; border-radius: 12px; color: #fff; background: rgba(255, 255, 255, 0.15); font-weight: 600; font-size: 14px; margin-bottom: 8px; backdrop-filter: blur(4px); }
+    .sidebar-note { margin-top: 36px; padding: 18px; border-radius: 14px; background: rgba(255, 255, 255, 0.08); border: 1px solid rgba(255, 255, 255, 0.15); }
     .sidebar-note strong { display: block; font-size: 13px; margin-bottom: 6px; }
-    .sidebar-note span { font-size: 12px; line-height: 1.5; opacity: 0.8; }
+    .sidebar-note span { font-size: 12px; line-height: 1.6; opacity: 0.8; }
 
-    main {
-      padding: 32px;
-      overflow-x: hidden;
-      max-width: 1440px;
-      margin: 0 auto;
-      width: 100%;
-    }
+    main { padding: 32px; overflow-x: hidden; max-width: 1440px; margin: 0 auto; width: 100%; }
 
-    /* ================= TOPBAR ================= */
-    .topbar {
-      display: flex;
-      justify-content: space-between;
-      gap: 20px;
-      align-items: flex-end;
-      margin-bottom: 30px;
-      flex-wrap: wrap;
-    }
+    /* TOPBAR & TANGGAL EDITABLE */
+    .topbar { display: flex; justify-content: space-between; gap: 20px; align-items: flex-end; margin-bottom: 32px; flex-wrap: wrap; }
+    .title-block h2 { font-size: clamp(24px, 4vw, 30px); font-weight: 800; color: var(--primary-dark); }
+    .title-block p { color: var(--muted); margin-top: 6px; font-size: 14px; }
+    .top-actions { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
 
-    .title-block h2 {
-      font-size: clamp(24px, 4vw, 32px);
-      font-weight: 800;
-      letter-spacing: -0.5px;
-      color: var(--primary-dark);
-    }
-
-    .title-block p {
-      color: var(--muted);
-      margin-top: 6px;
-      font-size: 14px;
-    }
-
-    .top-actions {
-      display: flex;
-      gap: 10px;
-      align-items: center;
-      flex-wrap: wrap;
-    }
-
-    .date-pill, .admin-pill {
-      padding: 10px 16px;
-      border-radius: 999px;
-      background: var(--card);
-      border: 1px solid var(--border);
-      color: var(--muted);
-      font-weight: 700;
-      font-size: 12px;
-      box-shadow: var(--shadow-sm);
-    }
+    .date-wrap { position: relative; display: inline-block; }
+    .date-pill, .admin-pill { padding: 10px 18px; border-radius: 999px; background: var(--card); border: 1px solid var(--border); color: var(--text); font-weight: 700; font-size: 13px; box-shadow: var(--shadow-sm); display: inline-flex; align-items: center; }
     .admin-pill.admin { background: #dcfce7; color: #166534; border-color: #bbf7d0; }
+    
+    /* Input tanggal admin melayang di atas tulisan */
+    #adminDateInput { position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; cursor: pointer; display: none; }
+    .admin-mode #adminDateInput { display: block; }
+    .admin-mode .date-wrap:hover .date-pill { border-color: var(--primary); color: var(--primary); }
 
-    /* ================= BUTTONS ================= */
-    .btn {
-      border: none;
-      border-radius: 12px;
-      padding: 12px 18px;
-      font-weight: 700;
-      cursor: pointer;
-      transition: all 0.2s ease;
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      gap: 8px;
-      font-size: 13px;
-      min-height: 44px; /* Touch friendly */
-    }
-    .btn-primary { background: var(--primary); color: #fff; box-shadow: 0 8px 16px rgba(15, 99, 201, 0.2); }
-    .btn-primary:hover { background: var(--primary-dark); transform: translateY(-1px); }
-    .btn-secondary { background: var(--primary-soft); color: var(--primary-dark); }
-    .btn-danger { background: #fee2e2; color: var(--danger); }
+    /* TOMBOL */
+    .btn { border: none; border-radius: 12px; padding: 12px 20px; font-weight: 700; cursor: pointer; transition: all 0.2s ease; display: inline-flex; align-items: center; justify-content: center; gap: 8px; font-size: 13px; min-height: 44px; }
+    .btn-primary { background: var(--primary); color: #fff; box-shadow: 0 8px 20px rgba(15, 99, 201, 0.25); }
+    .btn-primary:hover { background: var(--primary-dark); transform: translateY(-2px); box-shadow: 0 12px 24px rgba(15, 99, 201, 0.3); }
+    .btn-secondary { background: #f1f5f9; color: var(--text); border: 1px solid var(--border); }
+    .btn-secondary:hover { background: #e2e8f0; }
 
-    /* ================= STATS DASHBOARD ================= */
-    .stats {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-      gap: 16px;
-      margin-bottom: 30px;
-    }
+    /* STATS */
+    .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 16px; margin-bottom: 32px; }
+    .stat-card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 22px; box-shadow: var(--shadow-sm); transition: transform 0.2s ease; }
+    .stat-card:hover { transform: translateY(-3px); box-shadow: var(--shadow); }
+    .stat-card span { color: var(--muted); font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px; display: block; }
+    .stat-card strong { font-size: 30px; color: var(--primary-dark); font-weight: 900; line-height: 1; }
 
-    .stat-card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 20px;
-      box-shadow: var(--shadow-sm);
-      transition: transform 0.2s ease;
-    }
-    .stat-card:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
-    .stat-card span { color: var(--muted); font-size: 12px; font-weight: 600; margin-bottom: 8px; display: block; }
-    .stat-card strong { font-size: 28px; color: var(--text); font-weight: 800; line-height: 1; }
-
-    /* ================= FORM & CARDS ================= */
-    .layout {
-      display: grid;
-      grid-template-columns: 380px 1fr;
-      gap: 24px;
-      align-items: start;
-    }
-
-    .card {
-      background: var(--card);
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      box-shadow: var(--shadow);
-      overflow: hidden;
-    }
-
-    .form-card { padding: 24px; }
-    .card-header { margin-bottom: 20px; }
+    /* FORM & KARTU */
+    .layout { display: grid; grid-template-columns: 380px 1fr; gap: 24px; align-items: start; }
+    .card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); box-shadow: var(--shadow-sm); overflow: hidden; }
+    .form-card { padding: 26px; }
+    .card-header { margin-bottom: 22px; padding-bottom: 16px; border-bottom: 1px dashed var(--border); }
     .card-header h3 { font-size: 18px; color: var(--primary-dark); font-weight: 800; }
 
     form { display: grid; gap: 16px; }
-    .field { display: grid; gap: 6px; }
+    .field { display: grid; gap: 8px; }
     label { color: var(--muted); font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; }
     
-    input, select, textarea {
-      width: 100%;
-      padding: 14px;
-      border-radius: 12px;
-      border: 1px solid #cbd5e1;
-      background: #f8fafc;
-      color: var(--text);
-      font-size: 14px;
-      font-weight: 500;
-      transition: all 0.2s;
-    }
-    input:focus, select:focus, textarea:focus {
-      background: #fff;
-      border-color: var(--primary);
-      box-shadow: 0 0 0 4px var(--primary-soft);
-      outline: none;
-    }
+    input, select, textarea { width: 100%; padding: 14px 16px; border-radius: 12px; border: 1px solid var(--border); background: #f8fafc; color: var(--text); font-size: 14px; font-weight: 500; transition: all 0.2s; }
+    input:focus, select:focus, textarea:focus { background: #fff; border-color: var(--primary); box-shadow: 0 0 0 4px var(--primary-soft); outline: none; }
+    textarea { min-height: 80px; resize: vertical; }
     
     .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-    .three-col { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
-    
-    /* ================= TOOLBAR & TABLE ================= */
-    .toolbar {
-      padding: 20px;
-      border-bottom: 1px solid var(--border);
-      display: grid;
-      grid-template-columns: 1.5fr 1fr 1fr 1fr;
-      gap: 12px;
-      background: #fafbfc;
-    }
+    .actions { display: flex; gap: 12px; margin-top: 8px; }
+    .actions .btn-primary { flex: 1; }
 
+    /* TABEL & PENCARIAN */
+    .toolbar { padding: 22px; border-bottom: 1px solid var(--border); display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 14px; background: #fafbfc; }
     .search-wrap { position: relative; }
-    .search-wrap input { padding-left: 44px; background: #fff; }
-    .search-icon { position: absolute; left: 16px; top: 50%; transform: translateY(-50%); font-size: 16px; }
+    .search-wrap input { padding-left: 46px; background: #fff; }
+    .search-icon { position: absolute; left: 18px; top: 50%; transform: translateY(-50%); font-size: 16px; }
 
     .bus-groups { padding: 24px; display: grid; gap: 24px; }
-    .bus-group {
-      border: 1px solid var(--border);
-      border-radius: var(--radius);
-      overflow: hidden;
-      background: #fff;
-      box-shadow: var(--shadow-sm);
-    }
+    .bus-group { border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; background: #fff; box-shadow: 0 4px 15px rgba(0,0,0,0.03); }
+    .bus-head { padding: 22px; background: linear-gradient(135deg, #f8fafc, #f1f5f9); border-bottom: 1px solid var(--border); }
+    .bus-title h4 { font-size: 19px; color: var(--primary-dark); font-weight: 800; margin-bottom: 6px; }
+    .bus-meta { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 14px; }
+    .meta-chip { padding: 8px 14px; border-radius: 10px; background: #fff; border: 1px solid var(--border); font-size: 12px; font-weight: 700; color: var(--text); box-shadow: 0 2px 4px rgba(0,0,0,0.02); }
 
-    .bus-head {
-      padding: 20px;
-      background: linear-gradient(to right, #f8fafc, #f1f5f9);
-      border-bottom: 1px solid var(--border);
-    }
-    .bus-title h4 { font-size: 18px; color: var(--primary-dark); font-weight: 800; margin-bottom: 4px; }
-    .bus-title p { font-size: 13px; color: var(--muted); }
+    .maps-link { color: var(--primary); font-weight: 700; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; }
+    .maps-link:hover { color: var(--primary-dark); text-decoration: underline; }
+    .tracking-btn { background: var(--primary); color: white; padding: 8px 14px; border-radius: 10px; text-decoration: none; font-size: 12px; font-weight: 700; box-shadow: 0 4px 10px rgba(15, 99, 201, 0.3); transition: 0.2s; }
+    .tracking-btn:hover { background: var(--primary-dark); transform: translateY(-1px); }
+
+    .table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
+    table { width: 100%; border-collapse: collapse; min-width: 750px; }
+    th { text-align: left; background: #fff; padding: 18px; font-size: 12px; font-weight: 800; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px; border-bottom: 2px solid var(--border); }
+    td { padding: 18px; border-bottom: 1px solid #f1f5f9; font-size: 14px; vertical-align: middle; }
+    tbody tr:hover { background: var(--bg); }
     
-    .bus-meta {
-      display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
-      margin-top: 12px;
-    }
-    .meta-chip {
-      padding: 6px 12px;
-      border-radius: 8px;
-      background: #fff;
-      border: 1px solid var(--border);
-      font-size: 12px;
-      font-weight: 700;
-      color: var(--muted);
-    }
-
-    .maps-link { color: var(--primary); font-weight: 700; text-decoration: none; display: inline-flex; align-items: center; gap: 4px; }
-    .maps-link:hover { text-decoration: underline; color: var(--primary-dark); }
-    .tracking-btn { background: #0284c7; color: white; padding: 6px 12px; border-radius: 8px; text-decoration: none; font-size: 12px; font-weight: 700; box-shadow: 0 4px 6px rgba(2, 132, 199, 0.2); }
-
-    /* TABLE RESPONSIVE WRAPPER */
-    .table-wrap {
-      overflow-x: auto;
-      -webkit-overflow-scrolling: touch; /* Smooth scroll di iPhone */
-    }
-    table { width: 100%; border-collapse: collapse; min-width: 800px; } /* Min width agar tabel tidak gepeng */
-    th { text-align: left; background: #f8fafc; padding: 16px; font-size: 12px; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px; border-bottom: 1px solid var(--border); }
-    td { padding: 16px; border-bottom: 1px solid var(--border); font-size: 14px; vertical-align: middle; }
-    tbody tr:hover { background: var(--blue-50); }
+    .name-cell strong { display: block; color: var(--text); font-size: 15px; font-weight: 700; margin-bottom: 4px; }
+    .seat-chip { display: grid; place-items: center; width: 44px; height: 34px; border-radius: 10px; background: var(--primary-soft); color: var(--primary-dark); font-weight: 800; font-size: 13px; }
     
-    .name-cell strong { display: block; color: var(--text); font-size: 15px; margin-bottom: 2px; }
-    .name-cell small { color: var(--muted); font-size: 12px; }
-
-    .seat-chip { display: grid; place-items: center; width: 40px; height: 32px; border-radius: 8px; background: var(--primary-soft); color: var(--primary-dark); font-weight: 800; font-size: 12px; }
-    
-    /* BADGE STATUS */
-    .badge-status { display: inline-flex; padding: 6px 12px; border-radius: 999px; font-size: 12px; font-weight: 800; }
+    .badge-status { display: inline-flex; padding: 8px 14px; border-radius: 999px; font-size: 12px; font-weight: 800; }
     .badge-status.naik { background: #dcfce7; color: #166534; }
     .badge-status.konfirmasi { background: #fef3c7; color: #b45309; }
     .badge-status.terdata { background: #fee2e2; color: #b91c1c; }
 
-    .icon-btn { width: 36px; height: 36px; border-radius: 10px; border: 1px solid var(--border); background: #fff; cursor: pointer; display: grid; place-items: center; transition: 0.2s; }
-    .icon-btn:hover { background: #f1f5f9; }
+    .icon-btn { width: 38px; height: 38px; border-radius: 12px; border: 1px solid var(--border); background: #fff; cursor: pointer; display: grid; place-items: center; transition: 0.2s; font-size: 16px; }
+    .icon-btn:hover { background: #f1f5f9; border-color: #cbd5e1; }
     .row-actions { display: flex; gap: 8px; }
 
     /* MODAL */
-    .modal { position: fixed; inset: 0; background: rgba(15, 23, 42, 0.6); backdrop-filter: blur(4px); display: none; place-items: center; padding: 20px; z-index: 50; }
+    .modal { position: fixed; inset: 0; background: rgba(15, 23, 42, 0.6); backdrop-filter: blur(5px); display: none; place-items: center; padding: 20px; z-index: 50; }
     .modal.show { display: grid; }
-    .modal-content { width: min(400px, 100%); background: #fff; border-radius: 20px; overflow: hidden; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25); animation: popUp 0.3s ease-out; }
-    @keyframes popUp { from { transform: scale(0.95); opacity: 0; } to { transform: scale(1); opacity: 1; } }
-    .modal-header { padding: 20px 24px; background: var(--primary); color: #fff; display: flex; justify-content: space-between; align-items: center; }
-    .modal-header h3 { font-size: 18px; font-weight: 700; }
-    .close { background: rgba(255,255,255,0.2); border: none; color: #fff; width: 32px; height: 32px; border-radius: 8px; cursor: pointer; }
-    .login-body { padding: 24px; display: grid; gap: 16px; }
+    .modal-content { width: min(420px, 100%); background: #fff; border-radius: 24px; overflow: hidden; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.3); }
+    .modal-header { padding: 24px; background: var(--primary); color: #fff; display: flex; justify-content: space-between; align-items: center; }
+    .modal-header h3 { font-size: 20px; font-weight: 800; }
+    .close { background: rgba(255,255,255,0.2); border: none; color: #fff; width: 36px; height: 36px; border-radius: 10px; cursor: pointer; font-size: 18px; font-weight: bold; }
+    .login-body { padding: 30px 24px; display: grid; gap: 20px; }
 
     /* ADMIN MODE */
     .admin-only { display: none; }
@@ -343,50 +150,27 @@
     .admin-mode .row-actions.admin-only { display: flex; }
     body:not(.admin-mode) .layout { grid-template-columns: 1fr; }
     .bus-list { display: grid; gap: 12px; }
-    .bus-list-item { padding: 16px; border-radius: 12px; border: 1px solid var(--border); background: #f8fafc; display: flex; justify-content: space-between; align-items: center; }
+    .bus-list-item { padding: 18px; border-radius: 14px; border: 1px solid var(--border); background: #f8fafc; display: flex; justify-content: space-between; align-items: center; font-weight: 700; }
 
-    /* ================= RESPONSIVE MEDIA QUERIES (ANTI HANCUR) ================= */
-    
-    /* UNTUK TABLET & IPAD */
+    /* RESPONSIVE IPAD & HP */
     @media (max-width: 1100px) {
       .app { grid-template-columns: 1fr; }
-      
-      /* Sidebar berubah jadi Header Atas */
-      .sidebar {
-        height: auto;
-        padding: 16px 24px;
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-        position: relative;
-      }
+      .sidebar { height: auto; padding: 20px 24px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; z-index: 50;}
       .brand { margin-bottom: 0; }
-      .brand-logo { width: 40px; height: 40px; font-size: 20px; }
-      .sidebar-note, .nav-label { display: none; }
-      .nav-item { margin-bottom: 0; padding: 10px 14px; }
-      
-      body:not(.admin-mode) .layout { grid-template-columns: 1fr; }
-      .layout { grid-template-columns: 1fr; } /* Admin form pindah ke atas tabel pada layar kecil */
+      .brand-logo-img { width: 44px; height: 44px; }
+      .sidebar-note, .nav-item { display: none; }
+      .layout { grid-template-columns: 1fr; }
     }
-
-    /* UNTUK SMARTPHONE (IPHONE / ANDROID) */
     @media (max-width: 768px) {
-      main { padding: 16px; }
+      main { padding: 20px 16px; }
       .topbar { flex-direction: column; align-items: flex-start; gap: 16px; }
       .top-actions { width: 100%; justify-content: space-between; }
-      
-      .stats { grid-template-columns: 1fr 1fr; } /* 2 Kolom di HP */
-      
-      /* Merubah kolom sejajar menjadi bertumpuk ke bawah di layar kecil */
-      .two-col, .three-col { grid-template-columns: 1fr; gap: 12px; }
-      .toolbar { grid-template-columns: 1fr; gap: 12px; }
-      
-      .bus-head { padding: 16px; }
-      .bus-meta { flex-direction: column; align-items: flex-start; gap: 8px; }
-      
-      .card-header h3 { font-size: 16px; }
+      .stats { grid-template-columns: 1fr 1fr; gap: 12px; }
       .stat-card { padding: 16px; }
       .stat-card strong { font-size: 24px; }
+      .two-col, .toolbar { grid-template-columns: 1fr; gap: 12px; }
+      .bus-head { padding: 18px; }
+      .bus-meta { flex-direction: column; align-items: flex-start; gap: 10px; }
     }
   </style>
 </head>
@@ -394,13 +178,13 @@
   <div class="app">
     <aside class="sidebar">
       <div class="brand">
-        <div class="brand-logo">🚌</div>
+        <img src="Jadi.jpg" alt="Logo Lirboyo" class="brand-logo-img" />
         <div>
           <h1>Pemulangan Santri</h1>
           <p>Lirboyo Indramayu</p>
         </div>
       </div>
-      <div class="nav-item active">Manifest Bus</div>
+      <div class="nav-item">🚌 Manifest Data Bus</div>
       <div class="sidebar-note">
         <strong>Akses Sistem Live</strong>
         <span>Tracking & pencarian aktif untuk semua wali santri.</span>
@@ -414,7 +198,11 @@
           <p>Pantau status kepulangan santri secara real-time</p>
         </div>
         <div class="top-actions">
-          <span class="date-pill" id="currentDate">Hari ini</span>
+          <div class="date-wrap">
+            <span class="date-pill" id="currentDateDisplay">Memuat Tanggal...</span>
+            <input type="date" id="adminDateInput" title="Ubah Tanggal (Hanya Admin)" />
+          </div>
+          
           <span class="admin-pill" id="adminStatus">Mode Pengunjung</span>
           <button class="btn btn-primary" id="loginBtn">🔐 Admin</button>
           <button class="btn btn-danger admin-only" id="logoutBtn">Keluar</button>
@@ -422,24 +210,12 @@
       </section>
 
       <section class="stats">
-        <div class="stat-card" style="border-top: 4px solid #0f63c9;">
-          <span>Total Bus</span><strong id="dashTotalBus">0</strong>
-        </div>
-        <div class="stat-card" style="border-top: 4px solid #64748b;">
-          <span>Total Santri</span><strong id="dashTotalSantri">0</strong>
-        </div>
-        <div class="stat-card" style="border-top: 4px solid #16a34a;">
-          <span>Sudah Naik</span><strong id="dashSudahNaik">0</strong>
-        </div>
-        <div class="stat-card" style="border-top: 4px solid #dc2626;">
-          <span>Belum Naik</span><strong id="dashBelumNaik">0</strong>
-        </div>
-        <div class="stat-card" style="border-top: 4px solid #8b5cf6;">
-          <span>Titik Turun</span><strong id="dashTitikTurun">0</strong>
-        </div>
-        <div class="stat-card" style="border-top: 4px solid #0ea5e9;">
-          <span>Bus Berangkat</span><strong id="dashBusBerangkat">0</strong>
-        </div>
+        <div class="stat-card" style="border-left: 4px solid #0f63c9;"><span>Total Bus</span><strong id="dashTotalBus">0</strong></div>
+        <div class="stat-card" style="border-left: 4px solid #64748b;"><span>Total Santri</span><strong id="dashTotalSantri">0</strong></div>
+        <div class="stat-card" style="border-left: 4px solid #16a34a;"><span>Sudah Naik</span><strong id="dashSudahNaik">0</strong></div>
+        <div class="stat-card" style="border-left: 4px solid #dc2626;"><span>Belum Naik</span><strong id="dashBelumNaik">0</strong></div>
+        <div class="stat-card" style="border-left: 4px solid #8b5cf6;"><span>Titik Turun</span><strong id="dashTitikTurun">0</strong></div>
+        <div class="stat-card" style="border-left: 4px solid #0ea5e9;"><span>Bus Berangkat</span><strong id="dashBusBerangkat">0</strong></div>
       </section>
 
       <section class="layout">
@@ -449,14 +225,29 @@
             <form id="busForm">
               <input type="hidden" id="editBusId" />
               <div class="two-col">
-                <div class="field"><label>Nomor Bus</label><input type="text" id="nomorBus" required /></div>
-                <div class="field"><label>Kapasitas</label><input type="number" id="kapasitasBus" /></div>
+                <div class="field">
+                  <label>Nomor Bus</label>
+                  <select id="nomorBus" required></select>
+                </div>
+                <div class="field">
+                  <label>Kapasitas</label>
+                  <select id="kapasitasBus" required></select>
+                </div>
               </div>
               <div class="two-col">
                 <div class="field"><label>Tanggal</label><input type="date" id="tanggalPulang" required /></div>
                 <div class="field"><label>Jam Kumpul</label><input type="time" id="jamKumpul" required /></div>
               </div>
-              <div class="field"><label>Titik Kumpul</label><input type="text" id="titikKumpul" required /></div>
+              
+              <div class="field">
+                <label>Titik Kumpul</label>
+                <select id="titikKumpul" required>
+                  <option value="">-- Pilih Titik Kumpul --</option>
+                  <option value="Masjid al-Hasan">Masjid al-Hasan</option>
+                  <option value="Aula Muktamar">Aula Muktamar</option>
+                </select>
+              </div>
+              
               <div class="two-col">
                 <div class="field"><label>Koordinator</label><input type="text" id="koordinatorBus" required /></div>
                 <div class="field"><label>No HP Koor</label><input type="tel" id="telpKoordinator" /></div>
@@ -470,12 +261,12 @@
                     <option value="Selesai">⚪ Selesai</option>
                   </select>
                 </div>
-                <div class="field"><label>Link ShareLoc (GPS)</label><input type="url" id="linkGpsBus" placeholder="https://maps.app.goo.gl/..." /></div>
+                <div class="field"><label>Link ShareLoc (GPS)</label><input type="url" id="linkGpsBus" placeholder="https://maps.google.com/..." /></div>
               </div>
               <div class="field"><label>Catatan</label><textarea id="catatanBus"></textarea></div>
               <div class="actions">
-                <button type="submit" class="btn btn-primary" id="saveBusBtn">Simpan Bus</button>
-                <button type="button" class="btn btn-secondary" id="resetBusBtn">Reset</button>
+                <button type="submit" class="btn btn-primary" id="saveBusBtn">💾 Simpan Bus</button>
+                <button type="button" class="btn btn-secondary" id="resetBusBtn">↺ Reset</button>
               </div>
             </form>
           </article>
@@ -486,7 +277,43 @@
               <input type="hidden" id="editSantriId" />
               <div class="field"><label>Nama Lengkap</label><input type="text" id="nama" required /></div>
               <div class="two-col">
-                <div class="field"><label>NIS</label><input type="text" id="nis" required /></div>
+                <div class="field">
+                  <label>Kecamatan</label>
+                  <select id="kecamatanTujuan" required>
+                    <option value="">-- Pilih Kecamatan --</option>
+                    <option value="Anjatan">Anjatan</option>
+                    <option value="Arahan">Arahan</option>
+                    <option value="Balongan">Balongan</option>
+                    <option value="Bangodua">Bangodua</option>
+                    <option value="Bongas">Bongas</option>
+                    <option value="Cantigi">Cantigi</option>
+                    <option value="Cikedung">Cikedung</option>
+                    <option value="Gabuswetan">Gabuswetan</option>
+                    <option value="Gantar">Gantar</option>
+                    <option value="Haurgeulis">Haurgeulis</option>
+                    <option value="Indramayu">Indramayu</option>
+                    <option value="Jatibarang">Jatibarang</option>
+                    <option value="Juntinyuat">Juntinyuat</option>
+                    <option value="Kandanghaur">Kandanghaur</option>
+                    <option value="Karangampel">Karangampel</option>
+                    <option value="Kedokan Bunder">Kedokan Bunder</option>
+                    <option value="Kertasemaya">Kertasemaya</option>
+                    <option value="Krangkeng">Krangkeng</option>
+                    <option value="Kroya">Kroya</option>
+                    <option value="Lelea">Lelea</option>
+                    <option value="Lohbener">Lohbener</option>
+                    <option value="Losarang">Losarang</option>
+                    <option value="Pasekan">Pasekan</option>
+                    <option value="Patrol">Patrol</option>
+                    <option value="Sindang">Sindang</option>
+                    <option value="Sliyeg">Sliyeg</option>
+                    <option value="Sukagumiwang">Sukagumiwang</option>
+                    <option value="Sukra">Sukra</option>
+                    <option value="Terisi">Terisi</option>
+                    <option value="Tukdana">Tukdana</option>
+                    <option value="Widasari">Widasari</option>
+                  </select>
+                </div>
                 <div class="field">
                   <label>Status Santri</label>
                   <select id="status" required>
@@ -496,19 +323,18 @@
                   </select>
                 </div>
               </div>
-              <div class="three-col">
+              <div class="two-col">
                 <div class="field"><label>Pilih Bus</label><select id="busId" required></select></div>
                 <div class="field"><label>No Kursi</label><input type="text" id="nomorKursi" /></div>
-                <div class="field"><label>Rombongan</label><input type="text" id="rombongan" /></div>
               </div>
               <div class="two-col">
+                <div class="field"><label>Rombongan</label><input type="text" id="rombongan" /></div>
                 <div class="field"><label>Titik Turun</label><input type="text" id="titikTurun" required /></div>
-                <div class="field"><label>Kecamatan</label><input type="text" id="kecamatanTujuan" /></div>
               </div>
               <div class="field"><label>Alamat Detail</label><textarea id="alamatTujuan"></textarea></div>
               <div class="actions">
-                <button type="submit" class="btn btn-primary" id="saveSantriBtn">Simpan Santri</button>
-                <button type="button" class="btn btn-secondary" id="resetSantriBtn">Reset</button>
+                <button type="submit" class="btn btn-primary" id="saveSantriBtn">💾 Simpan Santri</button>
+                <button type="button" class="btn btn-secondary" id="resetSantriBtn">↺ Reset</button>
               </div>
             </form>
           </article>
@@ -523,7 +349,7 @@
           <div class="toolbar">
             <div class="search-wrap">
               <span class="search-icon">🔎</span>
-              <input type="search" id="searchInput" placeholder="Cari nama/NIS..." />
+              <input type="search" id="searchInput" placeholder="Cari nama santri..." />
             </div>
             <select id="filterBus"><option value="Semua">Semua Bus</option></select>
             <select id="filterTitik"><option value="Semua">Semua Titik Turun</option></select>
@@ -538,7 +364,7 @@
         </article>
       </section>
       
-      <p style="text-align:center; margin-top: 30px; font-size: 13px; color: var(--muted); font-weight:600;">© Forda Lirboyo Indramayu 2026</p>
+      <p style="text-align:center; margin-top: 36px; font-size: 13px; color: var(--muted); font-weight:700;">© Forda Lirboyo Indramayu 2026</p>
     </main>
   </div>
 
@@ -572,19 +398,42 @@
     const filterStatus = document.getElementById("filterStatus");
     const busGroups = document.getElementById("busGroups");
     const adminBusList = document.getElementById("adminBusList");
+    
+    const adminDateInput = document.getElementById("adminDateInput");
+    const currentDateDisplay = document.getElementById("currentDateDisplay");
 
     const busFields = ["nomorBus", "kapasitasBus", "tanggalPulang", "jamKumpul", "titikKumpul", "koordinatorBus", "telpKoordinator", "catatanBus"];
-    const santriFields = ["nama", "nis", "status", "busId", "nomorKursi", "rombongan", "titikTurun", "kecamatanTujuan", "alamatTujuan"];
+    const santriFields = ["nama", "kecamatanTujuan", "status", "busId", "nomorKursi", "rombongan", "titikTurun", "alamatTujuan"];
 
-    document.getElementById("currentDate").textContent = new Intl.DateTimeFormat("id-ID", {
-      weekday: "long", day: "2-digit", month: "long", year: "numeric"
-    }).format(new Date());
+    function generateNumberOptions() {
+      let options = `<option value="">-- Pilih --</option>`;
+      for(let i=1; i<=100; i++) { options += `<option value="${i}">${i}</option>`; }
+      document.getElementById("nomorBus").innerHTML = options;
+      document.getElementById("kapasitasBus").innerHTML = options;
+    }
+    generateNumberOptions();
+
+    function updateDateDisplay(dateObj) {
+      currentDateDisplay.innerHTML = `📅 ` + new Intl.DateTimeFormat("id-ID", {
+        weekday: "long", day: "2-digit", month: "long", year: "numeric"
+      }).format(dateObj);
+    }
+    
+    let activeDate = new Date();
+    adminDateInput.valueAsDate = activeDate;
+    updateDateDisplay(activeDate);
+
+    adminDateInput.addEventListener("change", (e) => {
+      if(e.target.value) {
+        activeDate = new Date(e.target.value);
+        updateDateDisplay(activeDate);
+      }
+    });
 
     async function loadOnlineData() {
       try {
         const [busRes, santriRes] = await Promise.all([
-          fetch(`${DB_BASE_URL}/buses.json`),
-          fetch(`${DB_BASE_URL}/santri.json`)
+          fetch(`${DB_BASE_URL}/buses.json`), fetch(`${DB_BASE_URL}/santri.json`)
         ]);
         const busData = await busRes.json();
         const santriData = await santriRes.json();
@@ -594,9 +443,7 @@
         
         filteredSantri = [...santri];
         renderAll();
-      } catch (error) {
-        alert("Koneksi ke database bermasalah. Pastikan internet lancar.");
-      }
+      } catch (error) { console.error("Database connection issue."); }
     }
 
     function filterData() {
@@ -607,7 +454,7 @@
 
       filteredSantri = santri.filter((item) => {
         const bus = getBus(item.busId);
-        const searchable = [item.nama, item.nis, item.status, item.nomorKursi, item.titikTurun, bus?.nomorBus].map(normalize).join(" ");
+        const searchable = [item.nama, item.kecamatanTujuan, item.status, item.nomorKursi, item.titikTurun, bus?.nomorBus].map(normalize).join(" ");
         return searchable.includes(keyword) && 
                (selectedBus === "Semua" || item.busId === selectedBus) &&
                (selectedTitik === "Semua" || item.titikTurun === selectedTitik) &&
@@ -640,7 +487,7 @@
 
     function renderBusGroups() {
       if (!buses.length) {
-        busGroups.innerHTML = `<div style="padding:40px 20px;text-align:center;color:var(--muted);background:#f8fafc;border-radius:16px;"><strong>Belum ada data manifest bus</strong></div>`;
+        busGroups.innerHTML = `<div style="padding:50px 20px;text-align:center;color:var(--muted);background:#fff;border-radius:16px;border:1px dashed var(--border);"><strong>Belum ada data manifest bus</strong></div>`;
         return;
       }
 
@@ -650,28 +497,29 @@
       busGroups.innerHTML = visibleBuses.map((bus) => {
         const rows = filteredSantri.filter(s => s.busId === bus.id);
         const trackingElement = bus.linkGpsBus 
-          ? `<a href="${bus.linkGpsBus}" target="_blank" class="tracking-btn">📍 Lacak Perjalanan (Live)</a>` 
-          : `<span style="font-size:12px;color:var(--muted);background:#f1f5f9;padding:6px 12px;border-radius:8px;">Titik GPS Nonaktif</span>`;
+          ? `<a href="${bus.linkGpsBus}" target="_blank" class="tracking-btn">📍 Live GPS</a>` 
+          : `<span style="font-size:12px;color:var(--muted);background:#f1f5f9;padding:8px 14px;border-radius:10px;font-weight:700;">GPS Offline</span>`;
 
         return `
           <section class="bus-group">
             <div class="bus-head">
-              <h4>Bus ${escapeHTML(bus.nomorBus)} <span style="font-size:14px;font-weight:600;opacity:0.8;">(${getBusStatusIcon(bus.statusJalanBus)})</span></h4>
-              <p>Koor: <strong>${escapeHTML(bus.koordinatorBus)}</strong> | ${escapeHTML(bus.telpKoordinator || "-")}</p>
+              <h4>Bus ${escapeHTML(bus.nomorBus)} <span style="font-size:14px;font-weight:700;opacity:0.7;margin-left:6px;">(${getBusStatusIcon(bus.statusJalanBus)})</span></h4>
+              <p style="font-size:13px; color:var(--muted); margin-top:4px;">Koor: <strong>${escapeHTML(bus.koordinatorBus)}</strong> | HP: ${escapeHTML(bus.telpKoordinator || "-")}</p>
               <div class="bus-meta">
                 <span class="meta-chip">⏰ ${escapeHTML(bus.jamKumpul)}</span>
-                <span class="meta-chip">📍 ${escapeHTML(bus.titikKumpul)}</span>
+                <span class="meta-chip">📍 Kumpul: ${escapeHTML(bus.titikKumpul)}</span>
                 ${trackingElement}
               </div>
             </div>
             <div class="table-wrap">
               <table>
-                <thead><tr><th>Kursi</th><th>Nama & NIS</th><th>Titik Turun (Maps)</th><th>Status</th><th class="admin-only">Aksi</th></tr></thead>
+                <thead><tr><th>Kursi</th><th>Nama Santri</th><th>Kecamatan</th><th>Titik Turun (Maps)</th><th>Status</th><th class="admin-only">Aksi</th></tr></thead>
                 <tbody>
-                  ${rows.length === 0 ? `<tr><td colspan="5" style="text-align:center;color:var(--muted);padding:30px;">Tidak ada santri di bus ini</td></tr>` : rows.map(item => `
+                  ${rows.length === 0 ? `<tr><td colspan="6" style="text-align:center;color:var(--muted);padding:40px;">Belum ada santri terdaftar di bus ini</td></tr>` : rows.map(item => `
                     <tr>
                       <td><span class="seat-chip">${escapeHTML(item.nomorKursi || "-")}</span></td>
-                      <td class="name-cell"><strong>${escapeHTML(item.nama)}</strong><small>${item.nis}</small></td>
+                      <td class="name-cell"><strong>${escapeHTML(item.nama)}</strong></td>
+                      <td>${escapeHTML(item.kecamatanTujuan || "-")}</td>
                       <td>
                         <a href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(item.titikTurun + ' Indramayu')}" target="_blank" class="maps-link">
                           📍 ${escapeHTML(item.titikTurun)}
@@ -680,8 +528,8 @@
                       <td>${getStatusBadge(item.status)}</td>
                       <td class="admin-only">
                         <div class="row-actions">
-                          <button class="icon-btn" onclick="editSantri('${item.id}')">✏️</button>
-                          <button class="icon-btn" onclick="deleteSantri('${item.id}')">🗑</button>
+                          <button class="icon-btn" onclick="editSantri('${item.id}')" title="Edit">✏️</button>
+                          <button class="icon-btn" onclick="deleteSantri('${item.id}')" title="Hapus">🗑</button>
                         </div>
                       </td>
                     </tr>
@@ -710,6 +558,8 @@
       } catch { alert("Gagal menyimpan ke server."); }
     });
 
+    clearForm = () => { resetBusForm(); resetSantriForm(); }
+
     santriForm.addEventListener("submit", async (e) => {
       e.preventDefault();
       if (!isAdmin) return;
@@ -726,7 +576,6 @@
     function getBus(id) { return buses.find(b => b.id === id) || null; }
     function normalize(t) { return String(t || "").toLowerCase().trim(); }
     function escapeHTML(t) { return String(t || "").replaceAll("&","&").replaceAll("<","<").replaceAll(">",">"); }
-    function formatDate(v) { if(!v) return "-"; return new Intl.DateTimeFormat("id-ID",{day:"2-digit",month:"long",year:"numeric"}).format(new Date(v+"T00:00:00")); }
     function getFormData(f) { const d = {}; f.forEach(field => d[field] = document.getElementById(field)?.value.trim()); return d; }
     function setFormData(f, d) { f.forEach(field => { if(document.getElementById(field)) document.getElementById(field).value = d[field] || ""; }); }
     function resetBusForm() { busForm.reset(); document.getElementById("editBusId").value = ""; }
@@ -736,7 +585,7 @@
       const sorted = [...buses].sort((a,b) => String(a.nomorBus).localeCompare(String(b.nomorBus), undefined, {numeric: true}));
       filterBus.innerHTML = `<option value="Semua">Semua Bus</option>` + sorted.map(b => `<option value="${b.id}">Bus ${b.nomorBus}</option>`).join("");
       const busSelect = document.getElementById("busId");
-      if (sorted.length > 0) busSelect.innerHTML = sorted.map(b => `<option value="${b.id}">Bus ${b.nomorBus}</option>`).join("");
+      if (sorted.length > 0) busSelect.innerHTML = sorted.map(b => `<option value="${b.id}">Bus ${b.nomorBus} - Koor: ${b.koordinatorBus}</option>`).join("");
       else busSelect.innerHTML = `<option value="">Tambah bus dulu</option>`;
       
       const uniqueTitik = [...new Set(santri.map(s => s.titikTurun).filter(Boolean))].sort();
@@ -746,7 +595,7 @@
     function renderAdminBusList() {
       adminBusList.innerHTML = buses.map(bus => `
         <div class="bus-list-item">
-          <strong>Bus ${escapeHTML(bus.nomorBus)}</strong>
+          <span>Bus ${escapeHTML(bus.nomorBus)} <small>(${escapeHTML(bus.kapasitasBus)} Seat)</small></span>
           <div class="row-actions">
             <button class="icon-btn" onclick="editBus('${bus.id}')" title="Edit">✏️</button>
             <button class="icon-btn" onclick="deleteBus('${bus.id}')" title="Hapus">🗑</button>
