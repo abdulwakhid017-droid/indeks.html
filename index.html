@@ -38,7 +38,6 @@
     .sidebar { background: linear-gradient(180deg, var(--primary), var(--primary-dark)); color: #fff; padding: 32px 24px; position: sticky; top: 0; height: 100vh; overflow-y: auto; z-index: 20; box-shadow: 4px 0 24px rgba(0,0,0,0.1); }
     .brand { display: flex; gap: 14px; align-items: center; margin-bottom: 40px; }
     
-    /* LOGO BARU */
     .brand-logo-img { width: 56px; height: 56px; border-radius: 14px; object-fit: contain; background: #fff; padding: 2px; box-shadow: 0 8px 16px rgba(0,0,0,0.15); }
     
     .brand h1 { font-size: 16px; line-height: 1.3; font-weight: 800; letter-spacing: 0.2px; }
@@ -61,10 +60,10 @@
     .date-pill, .admin-pill { padding: 10px 18px; border-radius: 999px; background: var(--card); border: 1px solid var(--border); color: var(--text); font-weight: 700; font-size: 13px; box-shadow: var(--shadow-sm); display: inline-flex; align-items: center; }
     .admin-pill.admin { background: #dcfce7; color: #166534; border-color: #bbf7d0; }
     
-    /* Input tanggal admin melayang di atas tulisan */
+    /* Input tanggal interaktif */
     #adminDateInput { position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; cursor: pointer; display: none; }
     .admin-mode #adminDateInput { display: block; }
-    .admin-mode .date-wrap:hover .date-pill { border-color: var(--primary); color: var(--primary); }
+    .admin-mode .date-wrap:hover .date-pill { border-color: var(--primary); color: var(--primary); background: var(--primary-soft); }
 
     /* TOMBOL */
     .btn { border: none; border-radius: 12px; padding: 12px 20px; font-weight: 700; cursor: pointer; transition: all 0.2s ease; display: inline-flex; align-items: center; justify-content: center; gap: 8px; font-size: 13px; min-height: 44px; }
@@ -206,7 +205,6 @@
           </div>
           
           <span class="admin-pill" id="adminStatus">Mode Pengunjung</span>
-          <!-- FITUR BARU: Tombol Reset Semua Data Angka (Hanya Muncul di Mode Admin) -->
           <button class="btn btn-danger admin-only" id="resetDbBtn" style="margin-right: 2px;">⚠️ Reset Database</button>
           
           <button class="btn btn-primary" id="loginBtn">🔐 Admin</button>
@@ -369,7 +367,6 @@
         </article>
       </section>
       
-      <!-- PERBAIKAN: Teks Copyright Sesuai Permintaan -->
       <p style="text-align:center; margin-top: 36px; font-size: 13px; color: var(--muted); font-weight:700;">© Forda Indramayu 2026</p>
     </main>
   </div>
@@ -440,6 +437,7 @@
       }
     }
 
+    // LISTENER EDIT OPSI TANGGAL HARI TAHUN NYA
     adminDateInput.addEventListener("change", async (e) => {
       if(!isAdmin) return;
       if(e.target.value) {
@@ -473,7 +471,6 @@
       } catch (error) { console.error("Database connection issue."); }
     }
 
-    // JAVASCRIPT FITUR BARU: Menghapus Semua Data Bus dan Santri dari Firebase Database
     resetDbBtn.addEventListener("click", async () => {
       if(!isAdmin) return;
       
@@ -624,7 +621,7 @@
     function renderAll() { populateSelects(); filterData(); renderStats(); renderAdminBusList(); renderBusGroups(); }
     function getBus(id) { return buses.find(b => b.id === id) || null; }
     function normalize(t) { return String(t || "").toLowerCase().trim(); }
-    function escapeHTML(t) { return String(t || "").replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;"); }
+    function escapeHTML(t) { return String(t || "").replaceAll("&","&").replaceAll("<","<").replaceAll(">",">"); }
     function getFormData(f) { const d = {}; f.forEach(field => d[field] = document.getElementById(field)?.value.trim()); return d; }
     function setFormData(f, d) { f.forEach(field => { if(document.getElementById(field)) document.getElementById(field).value = d[field] || ""; }); }
     function resetBusForm() { busForm.reset(); document.getElementById("editBusId").value = ""; }
