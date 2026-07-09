@@ -1,0 +1,20 @@
+{
+  "name": "Pemulangan Santri Lirboyo",
+  "short_name": "Santri Bus",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#0f63c9",
+  "icons": [
+    {
+      "src": "Jadi.jpg",
+      "sizes": "192x192",
+      "type": "image/jpeg"
+    },
+    {
+      "src": "Jadi.jpg",
+      "sizes": "512x512",
+      "type": "image/jpeg"
+    }
+  ]
+}
