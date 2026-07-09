@@ -707,7 +707,6 @@
         </div>
       </section>
 
-      <!-- 📊 LIVE STATS DASHBOARD -->
       <section class="stats">
         <div class="stat-card" style="border-left: 5px solid #0f63c9;">
           <span>🚌 Total Bus</span>
@@ -744,7 +743,6 @@
       </section>
 
       <section class="layout">
-        <!-- SIDEBAR INPUT ADMIN -->
         <aside class="admin-column admin-only">
           <article class="card form-card">
             <div class="card-header">
@@ -765,7 +763,6 @@
                 <div class="field"><label>Koordinator</label><input type="text" id="koordinatorBus" required /></div>
                 <div class="field"><label>No HP Koordinator</label><input type="tel" id="telpKoordinator" /></div>
               </div>
-              <!-- FITUR BARU: STATUS OPERASIONAL BUS & LINK TRACKING GPS -->
               <div class="two-col">
                 <div class="field">
                   <label>Status Jalan Bus</label>
@@ -828,12 +825,10 @@
           </article>
         </aside>
 
-        <!-- DATA MANIFEST UTAMA -->
         <article class="card manifest-card">
           <div class="toolbar">
             <div class="search-wrap">
               <span class="search-icon">🔎</span>
-              <!-- ⚡ REALTIME LIVE SEARCH INPUT -->
               <input type="search" id="searchInput" placeholder="Ketik nama untuk mencari langsung..." />
             </div>
             <select id="filterBus"><option value="Semua">Semua Bus</option></select>
@@ -853,7 +848,6 @@
     </main>
   </div>
 
-  <!-- MODAL LOGIN & DETAIL -->
   <div class="modal" id="loginModal">
     <div class="modal-content" style="width:min(460px,100%);">
       <div class="modal-header"><h3>Masuk Admin</h3><button class="close" id="closeLogin">×</button></div>
@@ -881,6 +875,48 @@
     let santri = [];
     let filteredSantri = [];
     let isAdmin = sessionStorage.getItem("pemulanganAdminMode") === "true";
+
+    const busForm = document.getElementById("busForm");
+    const santriForm = document.getElementById("santriForm");
+    const searchInput = document.getElementById("searchInput");
+    const filterBus = document.getElementById("filterBus");
+    const filterTitik = document.getElementById("filterTitik");
+    const filterStatus = document.getElementById("filterStatus");
+    const busGroups = document.getElementById("busGroups");
+    const adminBusList = document.getElementById("adminBusList");
+    const toast = document.getElementById("toast");
+
+    const busFields = [
+      "nomorBus",
+      "kapasitasBus",
+      "tanggalPulang",
+      "jamKumpul",
+      "titikKumpul",
+      "koordinatorBus",
+      "telpKoordinator",
+      "catatanBus"
+    ];
+
+    const santriFields = [
+      "nama",
+      "nis",
+      "status",
+      "busId",
+      "nomorKursi",
+      "rombongan",
+      "titikTurun",
+      "kecamatanTujuan",
+      "telpSantri",
+      "telpWali",
+      "alamatTujuan"
+    ];
+
+    document.getElementById("currentDate").textContent = new Intl.DateTimeFormat("id-ID", {
+      weekday: "long",
+      day: "2-digit",
+      month: "long",
+      year: "numeric"
+    }).format(new Date());
 
     // LOAD DATA ONLINE DARI FIREBASE
     async function loadOnlineData() {
@@ -992,9 +1028,8 @@
                     <tr>
                       <td><span class="seat-chip">${escapeHTML(item.nomorKursi || "-")}</span></td>
                       <td class="name-cell"><strong>${escapeHTML(item.nama)}</strong><small>NIS: ${item.nis}</small></td>
-                      <!-- FITUR KLIK TITIK TURUN LANGSUNG GOOGLE MAPS -->
                       <td>
-                        <a href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(item.titikTurun + ' Indramayu')}" target="_blank" class="maps-link">
+                        <a href="https://maps.google.com/?q=${encodeURIComponent(item.titikTurun + ' Indramayu')}" target="_blank" class="maps-link">
                           📍 <strong>${escapeHTML(item.titikTurun)}</strong>
                         </a>
                       </td>
@@ -1032,9 +1067,12 @@
 
       try {
         const url = id ? `${DB_BASE_URL}/buses/${id}.json` : `${DB_BASE_URL}/buses.json`;
-        await fetch(url, { method: id ? "PUT" : "POST", body: JSON.stringify(data) });
-        showToast("Data bus berhasil disinkronkan ke Cloud.");
-        resetBusForm(); loadOnlineData();
+        const response = await fetch(url, { method: id ? "PUT" : "POST", body: JSON.stringify(data) });
+        if (response.ok) {
+          showToast("Data bus berhasil disinkronkan ke Cloud.");
+          resetBusForm(); 
+          await loadOnlineData();
+        }
       } catch { showToast("Gagal menyimpan ke database."); }
     });
 
@@ -1047,9 +1085,12 @@
 
       try {
         const url = id ? `${DB_BASE_URL}/santri/${id}.json` : `${DB_BASE_URL}/santri.json`;
-        await fetch(url, { method: id ? "PUT" : "POST", body: JSON.stringify(data) });
-        showToast("Data santri berhasil disinkronkan ke Cloud.");
-        resetSantriForm(); loadOnlineData();
+        const response = await fetch(url, { method: id ? "PUT" : "POST", body: JSON.stringify(data) });
+        if (response.ok) {
+          showToast("Data santri berhasil disinkronkan ke Cloud.");
+          resetSantriForm(); 
+          await loadOnlineData();
+        }
       } catch { showToast("Gagal menyimpan ke database."); }
     });
 
@@ -1067,7 +1108,14 @@
     function populateSelects() {
       const sorted = [...buses].sort((a,b) => String(a.nomorBus).localeCompare(String(b.nomorBus), undefined, {numeric: true}));
       filterBus.innerHTML = `<option value="Semua">Semua Bus</option>` + sorted.map(b => `<option value="${b.id}">${b.nomorBus}</option>`).join("");
-      document.getElementById("busId").innerHTML = sorted.map(b => `<option value="${b.id}">${b.nomorBus} | ${b.koordinatorBus}</option>`).join("");
+      
+      const busSelect = document.getElementById("busId");
+      if (sorted.length > 0) {
+        busSelect.innerHTML = sorted.map(b => `<option value="${b.id}">${b.nomorBus} | ${b.koordinatorBus}</option>`).join("");
+      } else {
+        busSelect.innerHTML = `<option value="">Tambahkan bus dulu</option>`;
+      }
+      
       const uniqueTitik = [...new Set(santri.map(s => s.titikTurun).filter(Boolean))].sort();
       filterTitik.innerHTML = `<option value="Semua">Semua Titik Turun</option>` + uniqueTitik.map(t => `<option value="${t}">${t}</option>`).join("");
     }
@@ -1091,14 +1139,16 @@
       if(!bus) return;
       document.getElementById("editBusId").value = id;
       setFormData(busFields, bus);
+      document.body.classList.add("admin-mode");
       document.getElementById("statusJalanBus").value = bus.statusJalanBus || "Menunggu";
       document.getElementById("linkGpsBus").value = bus.linkGpsBus || "";
+      window.scrollTo({ top: 0, behavior: "smooth" });
     };
 
     window.deleteBus = async function(id) {
       if(!confirm("Hapus bus ini?")) return;
       await fetch(`${DB_BASE_URL}/buses/${id}.json`, { method: "DELETE" });
-      loadOnlineData();
+      await loadOnlineData();
     };
 
     window.editSantri = function(id) {
@@ -1106,12 +1156,13 @@
       if(!s) return;
       document.getElementById("editSantriId").value = id;
       setFormData(santriFields, s);
+      window.scrollTo({ top: 0, behavior: "smooth" });
     };
 
     window.deleteSantri = async function(id) {
       if(!confirm("Hapus santri ini?")) return;
       await fetch(`${DB_BASE_URL}/santri/${id}.json`, { method: "DELETE" });
-      loadOnlineData();
+      await loadOnlineData();
     };
 
     function applyAdminMode() {
