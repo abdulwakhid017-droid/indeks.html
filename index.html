@@ -699,4 +699,486 @@
           <h2>Info Pemulangan Santri Berbasis Bus</h2>
           <p>Data manifest bus real-time terintegrasi Cloud Database.</p>
         </div>
-        <div class
+        <div class="top-actions">
+          <span class="date-pill" id="currentDate">Hari ini</span>
+          <span class="admin-pill" id="adminStatus">Mode Pengunjung</span>
+          <button class="btn btn-primary" id="loginBtn">🔐 Masuk Admin</button>
+          <button class="btn btn-danger admin-only" id="logoutBtn">Keluar Admin</button>
+        </div>
+      </section>
+
+      <section class="stats">
+        <div class="stat-card" style="border-left: 5px solid #0f63c9;">
+          <span>🚌 Total Bus</span>
+          <strong id="dashTotalBus">0</strong>
+        </div>
+        <div class="stat-card" style="border-left: 5px solid #475569;">
+          <span>👥 Total Santri</span>
+          <strong id="dashTotalSantri">0</strong>
+        </div>
+        <div class="stat-card" style="border-left: 5px solid #16a34a;">
+          <span>🟢 Sudah Naik</span>
+          <strong id="dashSudahNaik">0</strong>
+        </div>
+        <div class="stat-card" style="border-left: 5px solid #dc2626;">
+          <span>⏳ Belum Naik</span>
+          <strong id="dashBelumNaik">0</strong>
+        </div>
+        <div class="stat-card" style="border-left: 5px solid #a855f7;">
+          <span>📍 Titik Turun</span>
+          <strong id="dashTitikTurun">0</strong>
+        </div>
+        <div class="stat-card" style="border-left: 5px solid #0284c7;">
+          <span>🔵 Bus Berangkat</span>
+          <strong id="dashBusBerangkat">0</strong>
+        </div>
+        <div class="stat-card" style="border-left: 5px solid #eab308;">
+          <span>🟡 Bus Menunggu</span>
+          <strong id="dashBusMenunggu">0</strong>
+        </div>
+        <div class="stat-card" style="border-left: 5px solid #64748b;">
+          <span>⚪ Bus Selesai</span>
+          <strong id="dashBusSelesai">0</strong>
+        </div>
+      </section>
+
+      <section class="layout">
+        <aside class="admin-column admin-only">
+          <article class="card form-card">
+            <div class="card-header">
+              <h3 id="busFormTitle">Kelola Data Bus</h3>
+            </div>
+            <form id="busForm">
+              <input type="hidden" id="editBusId" />
+              <div class="two-col">
+                <div class="field"><label>Nomor Bus</label><input type="text" id="nomorBus" required /></div>
+                <div class="field"><label>Kapasitas</label><input type="number" id="kapasitasBus" /></div>
+              </div>
+              <div class="two-col">
+                <div class="field"><label>Tanggal</label><input type="date" id="tanggalPulang" required /></div>
+                <div class="field"><label>Jam Kumpul</label><input type="time" id="jamKumpul" required /></div>
+              </div>
+              <div class="field"><label>Titik Kumpul</label><input type="text" id="titikKumpul" required /></div>
+              <div class="two-col">
+                <div class="field"><label>Koordinator</label><input type="text" id="koordinatorBus" required /></div>
+                <div class="field"><label>No HP Koordinator</label><input type="tel" id="telpKoordinator" /></div>
+              </div>
+              <div class="two-col">
+                <div class="field">
+                  <label>Status Jalan Bus</label>
+                  <select id="statusJalanBus">
+                    <option value="Menunggu">🟡 Menunggu</option>
+                    <option value="Berangkat">🔵 Berangkat</option>
+                    <option value="Selesai">⚪ Selesai</option>
+                  </select>
+                </div>
+                <div class="field"><label>Link Live GPS / WA ShareLoc</label><input type="url" id="linkGpsBus" placeholder="https://maps.google.com/..." /></div>
+              </div>
+              <div class="field"><label>Catatan Bus</label><textarea id="catatanBus"></textarea></div>
+              <div class="actions">
+                <button type="submit" class="btn btn-primary" id="saveBusBtn">💾 Simpan Bus</button>
+                <button type="button" class="btn btn-secondary" id="resetBusBtn">↺ Reset</button>
+              </div>
+            </form>
+          </article>
+
+          <article class="card form-card">
+            <div class="card-header"><h3 id="santriFormTitle">Kelola Santri</h3></div>
+            <form id="santriForm">
+              <input type="hidden" id="editSantriId" />
+              <div class="field"><label>Nama Lengkap</label><input type="text" id="nama" required /></div>
+              <div class="two-col">
+                <div class="field"><label>NIS</label><input type="text" id="nis" required /></div>
+                <div class="field">
+                  <label>Status Santri</label>
+                  <select id="status" required>
+                    <option value="Belum Datang">🔴 Belum Datang</option>
+                    <option value="Menunggu">🟡 Menunggu</option>
+                    <option value="Sudah Naik">🟢 Sudah Naik</option>
+                  </select>
+                </div>
+              </div>
+              <div class="three-col">
+                <div class="field"><label>Masuk Bus</label><select id="busId" required></select></div>
+                <div class="field"><label>No Kursi</label><input type="text" id="nomorKursi" /></div>
+                <div class="field"><label>Rombongan</label><input type="text" id="rombongan" /></div>
+              </div>
+              <div class="two-col">
+                <div class="field"><label>Titik Turun</label><input type="text" id="titikTurun" required /></div>
+                <div class="field"><label>Kecamatan</label><input type="text" id="kecamatanTujuan" /></div>
+              </div>
+              <div class="two-col">
+                <div class="field"><label>HP Santri</label><input type="tel" id="telpSantri" /></div>
+                <div class="field"><label>HP Wali</label><input type="tel" id="telpWali" /></div>
+              </div>
+              <div class="field"><label>Alamat Tujuan</label><textarea id="alamatTujuan"></textarea></div>
+              <div class="actions">
+                <button type="submit" class="btn btn-primary" id="saveSantriBtn">💾 Simpan Santri</button>
+                <button type="button" class="btn btn-secondary" id="resetSantriBtn">↺ Reset</button>
+              </div>
+            </form>
+          </article>
+
+          <article class="card form-card">
+            <div class="card-header"><h3>Daftar Bus Terdata</h3></div>
+            <div class="bus-list" id="adminBusList"></div>
+          </article>
+        </aside>
+
+        <article class="card manifest-card">
+          <div class="toolbar">
+            <div class="search-wrap">
+              <span class="search-icon">🔎</span>
+              <input type="search" id="searchInput" placeholder="Ketik nama untuk mencari langsung..." />
+            </div>
+            <select id="filterBus"><option value="Semua">Semua Bus</option></select>
+            <select id="filterTitik"><option value="Semua">Semua Titik Turun</option></select>
+            <select id="filterStatus">
+              <option value="Semua">Semua Status</option>
+              <option value="Belum Datang">🔴 Belum Datang</option>
+              <option value="Menunggu">🟡 Menunggu</option>
+              <option value="Sudah Naik">🟢 Sudah Naik</option>
+            </select>
+          </div>
+          <div class="bus-groups" id="busGroups"></div>
+        </article>
+      </section>
+
+      <p class="footer-note">©Forda2026</p>
+    </main>
+  </div>
+
+  <div class="modal" id="loginModal">
+    <div class="modal-content" style="width:min(460px,100%);">
+      <div class="modal-header"><h3>Masuk Admin</h3><button class="close" id="closeLogin">×</button></div>
+      <div class="login-body">
+        <div class="field"><label>Password Admin</label><input type="password" id="adminPassword" /></div>
+        <button class="btn btn-primary" id="submitLogin">Masuk</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal" id="detailModal">
+    <div class="modal-content">
+      <div class="modal-header"><div><h3 id="modalNama">Detail</h3><p id="modalSub"></p></div><button class="close" id="closeDetail">×</button></div>
+      <div class="modal-body" id="modalBody"></div>
+    </div>
+  </div>
+
+  <div class="toast" id="toast">Sukses</div>
+
+  <script>
+    const ADMIN_PASSWORD = "Lirboyo1910";
+    // UPDATE URL KE PROYEK FIREBASE MILIK KAMU
+    const DB_BASE_URL = "https://pemulangan-santri-indramayu-default-rtdb.asia-southeast1.firebasedatabase.app";
+
+    let buses = [];
+    let santri = [];
+    let filteredSantri = [];
+    let isAdmin = sessionStorage.getItem("pemulanganAdminMode") === "true";
+
+    const busForm = document.getElementById("busForm");
+    const santriForm = document.getElementById("santriForm");
+    const searchInput = document.getElementById("searchInput");
+    const filterBus = document.getElementById("filterBus");
+    const filterTitik = document.getElementById("filterTitik");
+    const filterStatus = document.getElementById("filterStatus");
+    const busGroups = document.getElementById("busGroups");
+    const adminBusList = document.getElementById("adminBusList");
+    const toast = document.getElementById("toast");
+
+    const busFields = [
+      "nomorBus",
+      "kapasitasBus",
+      "tanggalPulang",
+      "jamKumpul",
+      "titikKumpul",
+      "koordinatorBus",
+      "telpKoordinator",
+      "catatanBus"
+    ];
+
+    const santriFields = [
+      "nama",
+      "nis",
+      "status",
+      "busId",
+      "nomorKursi",
+      "rombongan",
+      "titikTurun",
+      "kecamatanTujuan",
+      "telpSantri",
+      "telpWali",
+      "alamatTujuan"
+    ];
+
+    document.getElementById("currentDate").textContent = new Intl.DateTimeFormat("id-ID", {
+      weekday: "long",
+      day: "2-digit",
+      month: "long",
+      year: "numeric"
+    }).format(new Date());
+
+    async function loadOnlineData() {
+      try {
+        const [busRes, santriRes] = await Promise.all([
+          fetch(`${DB_BASE_URL}/buses.json`),
+          fetch(`${DB_BASE_URL}/santri.json`)
+        ]);
+        const busData = await busRes.json();
+        const santriData = await santriRes.json();
+
+        buses = busData ? Object.keys(busData).map(key => ({ id: key, ...busData[key] })) : [];
+        santri = santriData ? Object.keys(santriData).map(key => ({ id: key, ...santriData[key] })) : [];
+        
+        filteredSantri = [...santri];
+        renderAll();
+      } catch (error) {
+        showToast("Gagal mengambil data dari database cloud.");
+      }
+    }
+
+    function filterData() {
+      const keyword = normalize(document.getElementById("searchInput").value);
+      const selectedBus = filterBus.value;
+      const selectedTitik = filterTitik.value;
+      const selectedStatus = filterStatus.value;
+
+      filteredSantri = santri.filter((item) => {
+        const bus = getBus(item.busId);
+        const searchable = [item.nama, item.nis, item.status, item.nomorKursi, item.titikTurun, bus?.nomorBus].map(normalize).join(" ");
+        
+        return searchable.includes(keyword) && 
+               (selectedBus === "Semua" || item.busId === selectedBus) &&
+               (selectedTitik === "Semua" || item.titikTurun === selectedTitik) &&
+               (selectedStatus === "Semua" || item.status === selectedStatus);
+      });
+    }
+
+    function renderStats() {
+      const uniqueTitik = new Set(santri.map(item => normalize(item.titikTurun)).filter(Boolean));
+      
+      document.getElementById("dashTotalBus").textContent = buses.length;
+      document.getElementById("dashTotalSantri").textContent = santri.length;
+      document.getElementById("dashSudahNaik").textContent = santri.filter(s => s.status === "Sudah Naik").length;
+      document.getElementById("dashBelumNaik").textContent = santri.filter(s => s.status !== "Sudah Naik").length;
+      document.getElementById("dashTitikTurun").textContent = uniqueTitik.size;
+      
+      document.getElementById("dashBusBerangkat").textContent = buses.filter(b => b.statusJalanBus === "Berangkat").length;
+      document.getElementById("dashBusMenunggu").textContent = buses.filter(b => b.statusJalanBus === "Menunggu" || !b.statusJalanBus).length;
+      document.getElementById("dashBusSelesai").textContent = buses.filter(b => b.statusJalanBus === "Selesai").length;
+    }
+
+    function getStatusBadge(status) {
+      const val = normalize(status);
+      if (val === "sudah naik") return `<span class="badge-status naik">🟢 Sudah Naik</span>`;
+      if (val === "menunggu") return `<span class="badge-status konfirmasi">🟡 Menunggu</span>`;
+      if (val === "belum datang") return `<span class="badge-status terdata">🔴 Belum Datang</span>`;
+      return `<span class="badge-status terdata">🔴 Belum Datang</span>`;
+    }
+
+    function getBusStatusIcon(status) {
+      if (status === "Berangkat") return "🔵 Berangkat";
+      if (status === "Selesai") return "⚪ Selesai";
+      return "🟡 Menunggu";
+    }
+
+    function renderBusGroups() {
+      if (!buses.length) {
+        busGroups.innerHTML = `<div class="empty"><strong>Belum ada data bus di cloud.</strong></div>`;
+        return;
+      }
+
+      const activeBusIds = filterBus.value === "Semua" ? [...new Set(filteredSantri.map(s => s.busId))] : [filterBus.value];
+      const visibleBuses = buses.filter(b => activeBusIds.includes(b.id));
+
+      busGroups.innerHTML = visibleBuses.map((bus) => {
+        const rows = filteredSantri.filter(s => s.busId === bus.id);
+        
+        const trackingElement = bus.linkGpsBus 
+          ? `<a href="${bus.linkGpsBus}" target="_blank" class="tracking-btn">📍 Lacak GPS Perjalanan Bus</a>` 
+          : `<span style="font-size:12px;color:var(--muted)">📍 GPS Belum Diaktifkan Sopir</span>`;
+
+        return `
+          <section class="bus-group">
+            <div class="bus-head">
+              <div>
+                <h4>🚌 ${escapeHTML(bus.nomorBus)} <span style="font-size:14px;font-weight:normal;">(${getBusStatusIcon(bus.statusJalanBus)})</span></h4>
+                <p>Koordinator: <strong>${escapeHTML(bus.koordinatorBus)}</strong> | HP: ${escapeHTML(bus.telpKoordinator || "-")}</p>
+                <div class="bus-meta">
+                  <span class="meta-chip">📅 ${formatDate(bus.tanggalPulang)}</span>
+                  <span class="meta-chip">⏰ ${escapeHTML(bus.jamKumpul)}</span>
+                  <span class="meta-chip">📍 Kumpul: ${escapeHTML(bus.titikKumpul)}</span>
+                  ${trackingElement}
+                </div>
+              </div>
+            </div>
+            <div class="table-wrap">
+              <table>
+                <thead>
+                  <tr><th>Kursi</th><th>Nama Santri</th><th>Titik Turun (Buka Google Maps)</th><th>Status</th><th class="admin-only">Aksi</th></tr>
+                </thead>
+                <tbody>
+                  ${rows.map(item => `
+                    <tr>
+                      <td><span class="seat-chip">${escapeHTML(item.nomorKursi || "-")}</span></td>
+                      <td class="name-cell"><strong>${escapeHTML(item.nama)}</strong><small>NIS: ${item.nis}</small></td>
+                      <td>
+                        <a href="https://maps.google.com/?q=${encodeURIComponent(item.titikTurun + ' Indramayu')}" target="_blank" class="maps-link">
+                          📍 <strong>${escapeHTML(item.titikTurun)}</strong>
+                        </a>
+                      </td>
+                      <td>${getStatusBadge(item.status)}</td>
+                      <td class="admin-only">
+                        <div class="row-actions">
+                          <button class="icon-btn" onclick="editSantri('${item.id}')">✏️</button>
+                          <button class="icon-btn" onclick="deleteSantri('${item.id}')">🗑</button>
+                        </div>
+                      </td>
+                    </tr>
+                  `).join("")}
+                </tbody>
+              </table>
+            </div>
+          </section>
+        `;
+      }).join("");
+    }
+
+    document.getElementById("searchInput").addEventListener("input", () => {
+      filterData();
+      renderBusGroups();
+    });
+
+    busForm.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      if (!requireAdmin()) return;
+      const id = document.getElementById("editBusId").value;
+      const data = getFormData(busFields);
+      data.statusJalanBus = document.getElementById("statusJalanBus").value;
+      data.linkGpsBus = document.getElementById("linkGpsBus").value.trim();
+
+      try {
+        const url = id ? `${DB_BASE_URL}/buses/${id}.json` : `${DB_BASE_URL}/buses.json`;
+        const response = await fetch(url, { method: id ? "PUT" : "POST", body: JSON.stringify(data) });
+        if (response.ok) {
+          showToast("Data bus berhasil disinkronkan ke Cloud.");
+          resetBusForm(); 
+          await loadOnlineData();
+        }
+      } catch { showToast("Gagal menyimpan ke database."); }
+    });
+
+    santriForm.addEventListener("submit", async (e) => {
+      e.preventDefault();
+      if (!requireAdmin()) return;
+      const id = document.getElementById("editSantriId").value;
+      const data = getFormData(santriFields);
+
+      try {
+        const url = id ? `${DB_BASE_URL}/santri/${id}.json` : `${DB_BASE_URL}/santri.json`;
+        const response = await fetch(url, { method: id ? "PUT" : "POST", body: JSON.stringify(data) });
+        if (response.ok) {
+          showToast("Data santri berhasil disinkronkan ke Cloud.");
+          resetSantriForm(); 
+          await loadOnlineData();
+        }
+      } catch { showToast("Gagal menyimpan ke database."); }
+    });
+
+    function renderAll() { populateSelects(); filterData(); renderStats(); renderAdminBusList(); renderBusGroups(); }
+    function getBus(id) { return buses.find(b => b.id === id) || null; }
+    function normalize(t) { return String(t || "").toLowerCase().trim(); }
+    function escapeHTML(t) { return String(t || "").replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;"); }
+    function formatDate(v) { if(!v) return "-"; return new Intl.DateTimeFormat("id-ID",{day:"2-digit",month:"long",year:"numeric"}).format(new Date(v+"T00:00:00")); }
+    function showToast(m) { toast.textContent = m; toast.classList.add("show"); setTimeout(() => toast.classList.remove("show"), 2200); }
+    function getFormData(f) { const d = {}; f.forEach(field => d[field] = document.getElementById(field).value.trim()); return d; }
+    function setFormData(f, d) { f.forEach(field => document.getElementById(field).value = d[field] || ""); }
+    function resetBusForm() { busForm.reset(); document.getElementById("editBusId").value = ""; }
+    function resetSantriForm() { santriForm.reset(); document.getElementById("editSantriId").value = ""; }
+
+    function populateSelects() {
+      const sorted = [...buses].sort((a,b) => String(a.nomorBus).localeCompare(String(b.nomorBus), undefined, {numeric: true}));
+      filterBus.innerHTML = `<option value="Semua">Semua Bus</option>` + sorted.map(b => `<option value="${b.id}">${b.nomorBus}</option>`).join("");
+      
+      const busSelect = document.getElementById("busId");
+      if (sorted.length > 0) {
+        busSelect.innerHTML = sorted.map(b => `<option value="${b.id}">${b.nomorBus} | ${b.koordinatorBus}</option>`).join("");
+      } else {
+        busSelect.innerHTML = `<option value="">Tambahkan bus dulu</option>`;
+      }
+      
+      const uniqueTitik = [...new Set(santri.map(s => s.titikTurun).filter(Boolean))].sort();
+      filterTitik.innerHTML = `<option value="Semua">Semua Titik Turun</option>` + uniqueTitik.map(t => `<option value="${t}">${t}</option>`).join("");
+    }
+
+    function renderAdminBusList() {
+      adminBusList.innerHTML = buses.map(bus => `
+        <div class="bus-list-item">
+          <div class="bus-list-item-head">
+            <strong>${bus.nomorBus}</strong>
+            <div>
+              <button class="icon-btn" onclick="editBus('${bus.id}')">✏️</button>
+              <button class="icon-btn" onclick="deleteBus('${bus.id}')">🗑</button>
+            </div>
+          </div>
+        </div>
+      `).join("");
+    }
+
+    window.editBus = function(id) {
+      const bus = buses.find(b => b.id === id);
+      if(!bus) return;
+      document.getElementById("editBusId").value = id;
+      setFormData(busFields, bus);
+      document.body.classList.add("admin-mode");
+      document.getElementById("statusJalanBus").value = bus.statusJalanBus || "Menunggu";
+      document.getElementById("linkGpsBus").value = bus.linkGpsBus || "";
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    };
+
+    window.deleteBus = async function(id) {
+      if(!confirm("Hapus bus ini?")) return;
+      await fetch(`${DB_BASE_URL}/buses/${id}.json`, { method: "DELETE" });
+      await loadOnlineData();
+    };
+
+    window.editSantri = function(id) {
+      const s = santri.find(item => item.id === id);
+      if(!s) return;
+      document.getElementById("editSantriId").value = id;
+      setFormData(santriFields, s);
+      window.scrollTo({ top: 0, behavior: "smooth" });
+    };
+
+    window.deleteSantri = async function(id) {
+      if(!confirm("Hapus santri ini?")) return;
+      await fetch(`${DB_BASE_URL}/santri/${id}.json`, { method: "DELETE" });
+      await loadOnlineData();
+    };
+
+    function applyAdminMode() {
+      document.body.classList.toggle("admin-mode", isAdmin);
+      document.getElementById("adminStatus").textContent = isAdmin ? "Mode Admin" : "Mode Pengunjung";
+      document.getElementById("loginBtn").style.display = isAdmin ? "none" : "inline-flex";
+    }
+
+    document.getElementById("loginBtn").addEventListener("click", () => document.getElementById("loginModal").classList.add("show"));
+    document.getElementById("closeLogin").addEventListener("click", () => document.getElementById("loginModal").classList.remove("show"));
+    document.getElementById("logoutBtn").addEventListener("click", () => { isAdmin = false; sessionStorage.removeItem("pemulanganAdminMode"); applyAdminMode(); });
+    document.getElementById("submitLogin").addEventListener("click", () => {
+      if(document.getElementById("adminPassword").value === ADMIN_PASSWORD) {
+        isAdmin = true; sessionStorage.setItem("pemulanganAdminMode", "true");
+        document.getElementById("loginModal").classList.remove("show"); applyAdminMode();
+      } else { alert("Password salah!"); }
+    });
+
+    filterBus.addEventListener("change", renderBusGroups);
+    filterTitik.addEventListener("change", renderBusGroups);
+    filterStatus.addEventListener("change", renderBusGroups);
+
+    applyAdminMode();
+    loadOnlineData();
+  </script>
+</body>
+</html>
