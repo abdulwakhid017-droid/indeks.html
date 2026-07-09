@@ -73,7 +73,7 @@
     .btn-secondary { background: #f1f5f9; color: var(--text); border: 1px solid var(--border); }
     .btn-secondary:hover { background: #e2e8f0; }
     .btn-danger { background: #fee2e2; color: #b91c1c; border: 1px solid #fca5a5; }
-    .btn-danger:hover { background: #fca5a5; }
+    .btn-danger:hover { background: #ef4444; color: #fff; }
 
     /* STATS */
     .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 16px; margin-bottom: 32px; }
@@ -206,8 +206,11 @@
           </div>
           
           <span class="admin-pill" id="adminStatus">Mode Pengunjung</span>
+          <!-- FITUR BARU: Tombol Reset Semua Data Angka (Hanya Muncul di Mode Admin) -->
+          <button class="btn btn-danger admin-only" id="resetDbBtn" style="margin-right: 2px;">⚠️ Reset Database</button>
+          
           <button class="btn btn-primary" id="loginBtn">🔐 Admin</button>
-          <button class="btn btn-danger admin-only" id="logoutBtn">Keluar</button>
+          <button class="btn btn-secondary admin-only" id="logoutBtn">Keluar</button>
         </div>
       </section>
 
@@ -366,7 +369,8 @@
         </article>
       </section>
       
-      <p style="text-align:center; margin-top: 36px; font-size: 13px; color: var(--muted); font-weight:700;">© Forda Lirboyo Indramayu 2026</p>
+      <!-- PERBAIKAN: Teks Copyright Sesuai Permintaan -->
+      <p style="text-align:center; margin-top: 36px; font-size: 13px; color: var(--muted); font-weight:700;">© Forda Indramayu 2026</p>
     </main>
   </div>
 
@@ -403,6 +407,7 @@
     
     const adminDateInput = document.getElementById("adminDateInput");
     const currentDateDisplay = document.getElementById("currentDateDisplay");
+    const resetDbBtn = document.getElementById("resetDbBtn");
 
     const busFields = ["nomorBus", "kapasitasBus", "tanggalPulang", "jamKumpul", "titikKumpul", "koordinatorBus", "telpKoordinator", "catatanBus"];
     const santriFields = ["nama", "kecamatanTujuan", "status", "busId", "nomorKursi", "rombongan", "titikTurun", "alamatTujuan"];
@@ -421,7 +426,6 @@
       }).format(dateObj);
     }
     
-    // SETUP TANGGAL SECARA ONLINE (TER-INTEGRASI DATABASE)
     async function loadActiveDate() {
       try {
         const res = await fetch(`${DB_BASE_URL}/settings/activeDate.json`);
@@ -436,7 +440,6 @@
       }
     }
 
-    // KETIKA ADMIN MENGUBAH TANGGAL (UPDATE PERMANEN KE FIREBASE)
     adminDateInput.addEventListener("change", async (e) => {
       if(!isAdmin) return;
       if(e.target.value) {
@@ -469,6 +472,30 @@
         renderAll();
       } catch (error) { console.error("Database connection issue."); }
     }
+
+    // JAVASCRIPT FITUR BARU: Menghapus Semua Data Bus dan Santri dari Firebase Database
+    resetDbBtn.addEventListener("click", async () => {
+      if(!isAdmin) return;
+      
+      const confirm1 = confirm("⚠️ PERINGATAN! Anda akan menghapus SELURUH data bus dan data santri secara permanen dari server.\n\nApakah Anda yakin?");
+      if(!confirm1) return;
+      
+      const confirm2 = confirm("Konfirmasi Terakhir: Tindakan ini TIDAK BISA dibatalkan dan semua hitungan statistik akan kembali menjadi 0. Lanjutkan?");
+      if(!confirm2) return;
+      
+      try {
+        await Promise.all([
+          fetch(`${DB_BASE_URL}/buses.json`, { method: "DELETE" }),
+          fetch(`${DB_BASE_URL}/santri.json`, { method: "DELETE" })
+        ]);
+        alert("Database Berhasil Dikosongkan! Semua data angka diatur ulang menjadi 0.");
+        resetBusForm();
+        resetSantriForm();
+        await loadOnlineData();
+      } catch (err) {
+        alert("Gagal mengosongkan database. Periksa koneksi internet Anda.");
+      }
+    });
 
     function filterData() {
       const keyword = normalize(searchInput.value);
@@ -582,10 +609,6 @@
       } catch { alert("Gagal menyimpan ke server."); }
     });
 
-    switch(isAdmin) {
-      
-    }
-
     santriForm.addEventListener("submit", async (e) => {
       e.preventDefault();
       if (!isAdmin) return;
@@ -601,7 +624,7 @@
     function renderAll() { populateSelects(); filterData(); renderStats(); renderAdminBusList(); renderBusGroups(); }
     function getBus(id) { return buses.find(b => b.id === id) || null; }
     function normalize(t) { return String(t || "").toLowerCase().trim(); }
-    function escapeHTML(t) { return String(t || "").replaceAll("&","&").replaceAll("<","<").replaceAll(">",">"); }
+    function escapeHTML(t) { return String(t || "").replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;"); }
     function getFormData(f) { const d = {}; f.forEach(field => d[field] = document.getElementById(field)?.value.trim()); return d; }
     function setFormData(f, d) { f.forEach(field => { if(document.getElementById(field)) document.getElementById(field).value = d[field] || ""; }); }
     function resetBusForm() { busForm.reset(); document.getElementById("editBusId").value = ""; }
@@ -683,7 +706,7 @@
     filterStatus.addEventListener("change", renderBusGroups);
 
     applyAdminMode();
-    loadActiveDate(); // Load tanggal dari database
+    loadActiveDate();
     loadOnlineData();
   </script>
 </body>
