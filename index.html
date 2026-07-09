@@ -72,6 +72,8 @@
     .btn-primary:hover { background: var(--primary-dark); transform: translateY(-2px); box-shadow: 0 12px 24px rgba(15, 99, 201, 0.3); }
     .btn-secondary { background: #f1f5f9; color: var(--text); border: 1px solid var(--border); }
     .btn-secondary:hover { background: #e2e8f0; }
+    .btn-danger { background: #fee2e2; color: #b91c1c; border: 1px solid #fca5a5; }
+    .btn-danger:hover { background: #fca5a5; }
 
     /* STATS */
     .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 16px; margin-bottom: 32px; }
@@ -180,8 +182,8 @@
       <div class="brand">
         <img src="Jadi.png" alt="Logo Lirboyo" class="brand-logo-img" onerror="this.src='https://via.placeholder.com/150/0f63c9/FFFFFF?text=Logo'" />
         <div>
-          <h1>Pemulangan Santri</h1>
-          <p>Lirboyo Indramayu</p>
+          <h1 style="font-weight: 800;">Pemulangan Santri Lirboyo</h1>
+          <p style="font-weight: 400; opacity: 0.9;">Asal Indramayu</p>
         </div>
       </div>
       <div class="nav-item">🚌 Manifest Data Bus</div>
@@ -419,14 +421,36 @@
       }).format(dateObj);
     }
     
-    let activeDate = new Date();
-    adminDateInput.valueAsDate = activeDate;
-    updateDateDisplay(activeDate);
-
-    adminDateInput.addEventListener("change", (e) => {
-      if(e.target.value) {
-        activeDate = new Date(e.target.value);
+    // SETUP TANGGAL SECARA ONLINE (TER-INTEGRASI DATABASE)
+    async function loadActiveDate() {
+      try {
+        const res = await fetch(`${DB_BASE_URL}/settings/activeDate.json`);
+        const savedDate = await res.json();
+        let activeDate = savedDate ? new Date(savedDate) : new Date();
+        adminDateInput.valueAsDate = activeDate;
         updateDateDisplay(activeDate);
+      } catch {
+        let activeDate = new Date();
+        adminDateInput.valueAsDate = activeDate;
+        updateDateDisplay(activeDate);
+      }
+    }
+
+    // KETIKA ADMIN MENGUBAH TANGGAL (UPDATE PERMANEN KE FIREBASE)
+    adminDateInput.addEventListener("change", async (e) => {
+      if(!isAdmin) return;
+      if(e.target.value) {
+        const selectedDate = new Date(e.target.value);
+        updateDateDisplay(selectedDate);
+        
+        try {
+          await fetch(`${DB_BASE_URL}/settings/activeDate.json`, {
+            method: "PUT",
+            body: JSON.stringify(e.target.value)
+          });
+        } catch (err) {
+          console.error("Gagal memperbarui tanggal ke database.");
+        }
       }
     });
 
@@ -558,6 +582,10 @@
       } catch { alert("Gagal menyimpan ke server."); }
     });
 
+    switch(isAdmin) {
+      
+    }
+
     santriForm.addEventListener("submit", async (e) => {
       e.preventDefault();
       if (!isAdmin) return;
@@ -573,7 +601,7 @@
     function renderAll() { populateSelects(); filterData(); renderStats(); renderAdminBusList(); renderBusGroups(); }
     function getBus(id) { return buses.find(b => b.id === id) || null; }
     function normalize(t) { return String(t || "").toLowerCase().trim(); }
-    function escapeHTML(t) { return String(t || "").replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;"); }
+    function escapeHTML(t) { return String(t || "").replaceAll("&","&").replaceAll("<","<").replaceAll(">",">"); }
     function getFormData(f) { const d = {}; f.forEach(field => d[field] = document.getElementById(field)?.value.trim()); return d; }
     function setFormData(f, d) { f.forEach(field => { if(document.getElementById(field)) document.getElementById(field).value = d[field] || ""; }); }
     function resetBusForm() { busForm.reset(); document.getElementById("editBusId").value = ""; }
@@ -655,6 +683,7 @@
     filterStatus.addEventListener("change", renderBusGroups);
 
     applyAdminMode();
+    loadActiveDate(); // Load tanggal dari database
     loadOnlineData();
   </script>
 </body>
