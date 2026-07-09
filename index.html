@@ -2,7 +2,7 @@
 <html lang="id">
 <head>
   <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <title>Pemulangan Santri Lirboyo Indramayu Berbasis Bus</title>
   <style>
     :root {
@@ -16,146 +16,135 @@
       --warning: #f59e0b;
       --danger: #dc2626;
       --text: #172033;
-      --muted: #667085;
-      --border: #d8e2f0;
-      --bg: #f4f8fd;
+      --muted: #64748b;
+      --border: #e2e8f0;
+      --bg: #f8fafc;
       --card: #ffffff;
-      --shadow: 0 18px 40px rgba(15, 99, 201, 0.13);
-      --radius: 18px;
+      --shadow-sm: 0 4px 6px -1px rgba(15, 99, 201, 0.05);
+      --shadow: 0 10px 25px -5px rgba(15, 99, 201, 0.1);
+      --radius: 16px;
     }
 
     * {
       box-sizing: border-box;
       margin: 0;
       padding: 0;
-      font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+      font-family: 'Inter', system-ui, -apple-system, sans-serif;
     }
 
     body {
       min-height: 100vh;
       color: var(--text);
-      background:
-        radial-gradient(circle at top left, rgba(56, 189, 248, 0.25), transparent 34rem),
-        radial-gradient(circle at top right, rgba(15, 99, 201, 0.19), transparent 30rem),
-        linear-gradient(180deg, #f6fbff, var(--bg));
+      background: var(--bg);
+      background-image: 
+        radial-gradient(circle at top left, rgba(56, 189, 248, 0.15), transparent 30rem),
+        radial-gradient(circle at top right, rgba(15, 99, 201, 0.1), transparent 30rem);
+      background-attachment: fixed;
+      -webkit-font-smoothing: antialiased;
     }
 
+    /* ================= LAYOUT UTAMA ================= */
     .app {
       display: grid;
-      grid-template-columns: 286px 1fr;
+      grid-template-columns: 280px 1fr;
       min-height: 100vh;
     }
 
     .sidebar {
       background: linear-gradient(180deg, var(--primary), var(--primary-dark));
       color: #fff;
-      padding: 28px 22px;
+      padding: 30px 24px;
       position: sticky;
       top: 0;
       height: 100vh;
       overflow-y: auto;
+      z-index: 20;
     }
 
     .brand {
       display: flex;
-      gap: 14px;
+      gap: 16px;
       align-items: center;
-      margin-bottom: 32px;
+      margin-bottom: 36px;
     }
 
     .brand-logo {
-      width: 54px;
-      height: 54px;
-      border-radius: 17px;
+      width: 50px;
+      height: 50px;
+      border-radius: 14px;
       display: grid;
       place-items: center;
-      background: rgba(255, 255, 255, 0.16);
-      border: 1px solid rgba(255, 255, 255, 0.28);
-      font-size: 28px;
-      font-weight: 900;
+      background: rgba(255, 255, 255, 0.2);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      font-size: 24px;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1);
     }
 
     .brand h1 {
-      font-size: 16.5px;
-      line-height: 1.25;
+      font-size: 16px;
+      line-height: 1.3;
       letter-spacing: 0.2px;
+      font-weight: 700;
     }
 
     .brand p {
-      font-size: 12px;
-      opacity: 0.78;
-      margin-top: 4px;
-    }
-
-    .nav-label {
       font-size: 11px;
-      text-transform: uppercase;
-      letter-spacing: 1.2px;
-      opacity: 0.6;
-      margin: 24px 10px 10px;
+      opacity: 0.8;
+      margin-top: 4px;
     }
 
     .nav-item {
       display: flex;
       align-items: center;
       gap: 12px;
-      padding: 13px 14px;
-      border-radius: 14px;
-      color: rgba(255, 255, 255, 0.86);
+      padding: 14px 16px;
+      border-radius: 12px;
+      color: rgba(255, 255, 255, 0.9);
+      background: rgba(255, 255, 255, 0.15);
+      font-weight: 600;
+      font-size: 14px;
       margin-bottom: 8px;
-      user-select: none;
-    }
-
-    .nav-item.active {
-      background: rgba(255, 255, 255, 0.16);
-      color: #fff;
     }
 
     .sidebar-note {
-      margin-top: 32px;
-      padding: 18px;
-      border-radius: 16px;
-      background: rgba(255, 255, 255, 0.12);
-      border: 1px solid rgba(255, 255, 255, 0.18);
+      margin-top: 36px;
+      padding: 16px;
+      border-radius: 12px;
+      background: rgba(255, 255, 255, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.15);
     }
-
-    .sidebar-note strong {
-      display: block;
-      font-size: 14px;
-      margin-bottom: 7px;
-    }
-
-    .sidebar-note span {
-      display: block;
-      font-size: 12.5px;
-      line-height: 1.55;
-      opacity: 0.82;
-    }
+    .sidebar-note strong { display: block; font-size: 13px; margin-bottom: 6px; }
+    .sidebar-note span { font-size: 12px; line-height: 1.5; opacity: 0.8; }
 
     main {
-      padding: 28px;
+      padding: 32px;
       overflow-x: hidden;
+      max-width: 1440px;
+      margin: 0 auto;
+      width: 100%;
     }
 
+    /* ================= TOPBAR ================= */
     .topbar {
       display: flex;
       justify-content: space-between;
-      gap: 16px;
-      align-items: center;
-      margin-bottom: 22px;
+      gap: 20px;
+      align-items: flex-end;
+      margin-bottom: 30px;
+      flex-wrap: wrap;
     }
 
     .title-block h2 {
-      font-size: clamp(23px, 3vw, 34px);
-      line-height: 1.15;
-      color: var(--text);
+      font-size: clamp(24px, 4vw, 32px);
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      color: var(--primary-dark);
     }
 
     .title-block p {
       color: var(--muted);
-      margin-top: 8px;
+      margin-top: 6px;
       font-size: 14px;
-      line-height: 1.5;
     }
 
     .top-actions {
@@ -163,123 +152,66 @@
       gap: 10px;
       align-items: center;
       flex-wrap: wrap;
-      justify-content: flex-end;
     }
 
-    .date-pill,
-    .admin-pill {
-      padding: 13px 16px;
+    .date-pill, .admin-pill {
+      padding: 10px 16px;
       border-radius: 999px;
       background: var(--card);
       border: 1px solid var(--border);
-      color: var(--primary-dark);
-      box-shadow: 0 10px 24px rgba(15, 99, 201, 0.08);
-      font-weight: 900;
-      white-space: nowrap;
-      font-size: 13px;
+      color: var(--muted);
+      font-weight: 700;
+      font-size: 12px;
+      box-shadow: var(--shadow-sm);
     }
+    .admin-pill.admin { background: #dcfce7; color: #166534; border-color: #bbf7d0; }
 
-    .admin-pill.admin {
-      background: #dcfce7;
-      color: #166534;
-      border-color: #bbf7d0;
-    }
-
+    /* ================= BUTTONS ================= */
     .btn {
       border: none;
-      border-radius: 13px;
-      padding: 12px 14px;
-      font-weight: 900;
+      border-radius: 12px;
+      padding: 12px 18px;
+      font-weight: 700;
       cursor: pointer;
-      transition: 0.2s ease;
+      transition: all 0.2s ease;
       display: inline-flex;
       align-items: center;
-      gap: 8px;
       justify-content: center;
+      gap: 8px;
       font-size: 13px;
-      min-height: 44px;
+      min-height: 44px; /* Touch friendly */
     }
+    .btn-primary { background: var(--primary); color: #fff; box-shadow: 0 8px 16px rgba(15, 99, 201, 0.2); }
+    .btn-primary:hover { background: var(--primary-dark); transform: translateY(-1px); }
+    .btn-secondary { background: var(--primary-soft); color: var(--primary-dark); }
+    .btn-danger { background: #fee2e2; color: var(--danger); }
 
-    .btn-primary {
-      background: linear-gradient(135deg, var(--primary), #1898e8);
-      color: #fff;
-      box-shadow: 0 12px 24px rgba(15, 99, 201, 0.24);
-    }
-
-    .btn-primary:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 16px 30px rgba(15, 99, 201, 0.28);
-    }
-
-    .btn-secondary {
-      background: var(--primary-soft);
-      color: var(--primary-dark);
-    }
-
-    .btn-danger {
-      background: #fee2e2;
-      color: var(--danger);
-    }
-
-    /* STATS DASHBOARD GRID */
+    /* ================= STATS DASHBOARD ================= */
     .stats {
       display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-      gap: 14px;
-      margin-bottom: 20px;
+      grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+      gap: 16px;
+      margin-bottom: 30px;
     }
 
     .stat-card {
       background: var(--card);
       border: 1px solid var(--border);
       border-radius: var(--radius);
-      padding: 18px;
-      box-shadow: 0 12px 30px rgba(15, 99, 201, 0.08);
-      position: relative;
-      overflow: hidden;
+      padding: 20px;
+      box-shadow: var(--shadow-sm);
+      transition: transform 0.2s ease;
     }
+    .stat-card:hover { transform: translateY(-2px); box-shadow: var(--shadow); }
+    .stat-card span { color: var(--muted); font-size: 12px; font-weight: 600; margin-bottom: 8px; display: block; }
+    .stat-card strong { font-size: 28px; color: var(--text); font-weight: 800; line-height: 1; }
 
-    .stat-card span {
-      color: var(--muted);
-      font-size: 12.5px;
-      display: block;
-      margin-bottom: 6px;
-      font-weight: 600;
-    }
-
-    .stat-card strong {
-      font-size: 26px;
-      color: var(--text);
-      display: block;
-    }
-
-    /* BADGE STATUS WARNA */
-    .badge-status {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      padding: 6px 14px;
-      border-radius: 999px;
-      font-size: 12.5px;
-      font-weight: 800;
-      white-space: nowrap;
-    }
-    .badge-status.naik { background: #dcfce7; color: #15803d; }
-    .badge-status.konfirmasi { background: #fef3c7; color: #b45309; }
-    .badge-status.terdata { background: #fee2e2; color: #b91c1c; }
-    .badge-status.berangkat { background: #e0f2fe; color: #0369a1; }
-    .badge-status.selesai { background: #f1f5f9; color: #64748b; }
-
+    /* ================= FORM & CARDS ================= */
     .layout {
       display: grid;
-      grid-template-columns: 410px 1fr;
-      gap: 18px;
+      grid-template-columns: 380px 1fr;
+      gap: 24px;
       align-items: start;
-    }
-
-    .admin-column {
-      display: grid;
-      gap: 18px;
     }
 
     .card {
@@ -287,292 +219,174 @@
       border: 1px solid var(--border);
       border-radius: var(--radius);
       box-shadow: var(--shadow);
+      overflow: hidden;
     }
 
-    .form-card {
-      padding: 22px;
-    }
+    .form-card { padding: 24px; }
+    .card-header { margin-bottom: 20px; }
+    .card-header h3 { font-size: 18px; color: var(--primary-dark); font-weight: 800; }
 
-    .card-header {
-      display: flex;
-      justify-content: space-between;
-      gap: 12px;
-      align-items: flex-start;
-      margin-bottom: 18px;
-    }
-
-    .card-header h3 {
-      font-size: 19px;
-      color: var(--text);
-    }
-
-    form {
-      display: grid;
-      gap: 14px;
-    }
-
-    .field {
-      display: grid;
-      gap: 7px;
-    }
-
-    label {
-      color: #31405a;
-      font-size: 13px;
-      font-weight: 800;
-    }
-
+    form { display: grid; gap: 16px; }
+    .field { display: grid; gap: 6px; }
+    label { color: var(--muted); font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; }
+    
     input, select, textarea {
       width: 100%;
-      padding: 12px 13px;
-      border-radius: 13px;
-      border: 1px solid var(--border);
-      background: #fbfdff;
+      padding: 14px;
+      border-radius: 12px;
+      border: 1px solid #cbd5e1;
+      background: #f8fafc;
       color: var(--text);
-      outline: none;
-      transition: 0.2s ease;
       font-size: 14px;
+      font-weight: 500;
+      transition: all 0.2s;
     }
-
-    textarea {
-      min-height: 82px;
-      resize: vertical;
-    }
-
     input:focus, select:focus, textarea:focus {
-      border-color: var(--primary);
-      box-shadow: 0 0 0 4px rgba(15, 99, 201, 0.11);
       background: #fff;
+      border-color: var(--primary);
+      box-shadow: 0 0 0 4px var(--primary-soft);
+      outline: none;
     }
-
-    .two-col {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 12px;
-    }
-
-    .three-col {
-      display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
-      gap: 12px;
-    }
-
-    .actions {
-      display: flex;
-      gap: 10px;
-      flex-wrap: wrap;
-      margin-top: 4px;
-    }
-
-    .actions .btn-primary {
-      flex: 1;
-    }
-
-    .manifest-card {
-      overflow: hidden;
-    }
-
+    
+    .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+    .three-col { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 16px; }
+    
+    /* ================= TOOLBAR & TABLE ================= */
     .toolbar {
-      padding: 18px;
+      padding: 20px;
       border-bottom: 1px solid var(--border);
       display: grid;
-      grid-template-columns: 1.2fr 150px 170px 170px;
-      gap: 10px;
-      align-items: center;
+      grid-template-columns: 1.5fr 1fr 1fr 1fr;
+      gap: 12px;
+      background: #fafbfc;
     }
 
-    .search-wrap {
-      position: relative;
-    }
+    .search-wrap { position: relative; }
+    .search-wrap input { padding-left: 44px; background: #fff; }
+    .search-icon { position: absolute; left: 16px; top: 50%; transform: translateY(-50%); font-size: 16px; }
 
-    .search-wrap input {
-      padding-left: 42px;
-      font-weight: bold;
-      border-color: var(--primary);
-    }
-
-    .search-icon {
-      position: absolute;
-      left: 14px;
-      top: 50%;
-      transform: translateY(-50%);
-      color: var(--primary);
-      font-size: 16px;
-    }
-
-    .bus-groups {
-      padding: 18px;
-      display: grid;
-      gap: 18px;
-    }
-
+    .bus-groups { padding: 24px; display: grid; gap: 24px; }
     .bus-group {
       border: 1px solid var(--border);
-      border-radius: 18px;
+      border-radius: var(--radius);
       overflow: hidden;
       background: #fff;
+      box-shadow: var(--shadow-sm);
     }
 
     .bus-head {
-      display: grid;
-      grid-template-columns: 1fr auto;
-      gap: 14px;
-      align-items: start;
-      padding: 17px;
-      background: linear-gradient(135deg, #f8fbff, #edf6ff);
+      padding: 20px;
+      background: linear-gradient(to right, #f8fafc, #f1f5f9);
       border-bottom: 1px solid var(--border);
     }
-
-    .bus-title h4 {
-      font-size: 19px;
-      color: var(--primary-dark);
-      margin-bottom: 5px;
-    }
-
+    .bus-title h4 { font-size: 18px; color: var(--primary-dark); font-weight: 800; margin-bottom: 4px; }
+    .bus-title p { font-size: 13px; color: var(--muted); }
+    
     .bus-meta {
       display: flex;
       gap: 8px;
       flex-wrap: wrap;
-      margin-top: 10px;
+      margin-top: 12px;
     }
-
     .meta-chip {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      padding: 7px 10px;
-      border-radius: 999px;
-      background: #fff;
-      border: 1px solid #cde4ff;
-      color: #27496d;
-      font-size: 12px;
-      font-weight: 800;
-    }
-
-    .maps-link {
-      color: var(--primary);
-      text-decoration: none;
-      font-weight: bold;
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
-    }
-    .maps-link:hover {
-      text-decoration: underline;
-    }
-
-    .tracking-btn {
-      background: #0284c7;
-      color: white;
       padding: 6px 12px;
       border-radius: 8px;
-      text-decoration: none;
+      background: #fff;
+      border: 1px solid var(--border);
       font-size: 12px;
-      font-weight: bold;
-      display: inline-flex;
-      align-items: center;
-      gap: 4px;
+      font-weight: 700;
+      color: var(--muted);
     }
-    .tracking-btn:hover { background: #0369a1; }
 
+    .maps-link { color: var(--primary); font-weight: 700; text-decoration: none; display: inline-flex; align-items: center; gap: 4px; }
+    .maps-link:hover { text-decoration: underline; color: var(--primary-dark); }
+    .tracking-btn { background: #0284c7; color: white; padding: 6px 12px; border-radius: 8px; text-decoration: none; font-size: 12px; font-weight: 700; box-shadow: 0 4px 6px rgba(2, 132, 199, 0.2); }
+
+    /* TABLE RESPONSIVE WRAPPER */
     .table-wrap {
       overflow-x: auto;
+      -webkit-overflow-scrolling: touch; /* Smooth scroll di iPhone */
     }
+    table { width: 100%; border-collapse: collapse; min-width: 800px; } /* Min width agar tabel tidak gepeng */
+    th { text-align: left; background: #f8fafc; padding: 16px; font-size: 12px; font-weight: 700; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px; border-bottom: 1px solid var(--border); }
+    td { padding: 16px; border-bottom: 1px solid var(--border); font-size: 14px; vertical-align: middle; }
+    tbody tr:hover { background: var(--blue-50); }
+    
+    .name-cell strong { display: block; color: var(--text); font-size: 15px; margin-bottom: 2px; }
+    .name-cell small { color: var(--muted); font-size: 12px; }
 
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      min-width: 1030px;
-    }
+    .seat-chip { display: grid; place-items: center; width: 40px; height: 32px; border-radius: 8px; background: var(--primary-soft); color: var(--primary-dark); font-weight: 800; font-size: 12px; }
+    
+    /* BADGE STATUS */
+    .badge-status { display: inline-flex; padding: 6px 12px; border-radius: 999px; font-size: 12px; font-weight: 800; }
+    .badge-status.naik { background: #dcfce7; color: #166534; }
+    .badge-status.konfirmasi { background: #fef3c7; color: #b45309; }
+    .badge-status.terdata { background: #fee2e2; color: #b91c1c; }
 
-    thead {
-      background: #f7fbff;
-    }
+    .icon-btn { width: 36px; height: 36px; border-radius: 10px; border: 1px solid var(--border); background: #fff; cursor: pointer; display: grid; place-items: center; transition: 0.2s; }
+    .icon-btn:hover { background: #f1f5f9; }
+    .row-actions { display: flex; gap: 8px; }
 
-    th {
-      text-align: left;
-      color: #31405a;
-      padding: 13px 14px;
-      font-size: 12px;
-      text-transform: uppercase;
-      letter-spacing: 0.6px;
-      border-bottom: 1px solid var(--border);
-      white-space: nowrap;
-    }
-
-    td {
-      padding: 14px;
-      border-bottom: 1px solid #edf2f7;
-      color: #26344d;
-      font-size: 14px;
-      vertical-align: top;
-    }
-
-    tbody tr:hover {
-      background: #f9fcff;
-    }
-
-    .name-cell strong {
-      display: block;
-      color: var(--text);
-      margin-bottom: 4px;
-    }
-
-    .seat-chip {
-      display: inline-flex;
-      align-items: center;
-      justify-content: center;
-      min-width: 42px;
-      height: 30px;
-      border-radius: 10px;
-      background: #eef6ff;
-      border: 1px solid #cde4ff;
-      color: var(--primary-dark);
-      font-size: 12px;
-      font-weight: 900;
-    }
-
-    .row-actions {
-      display: flex;
-      gap: 8px;
-    }
-
-    .icon-btn {
-      width: 36px;
-      height: 36px;
-      border-radius: 10px;
-      border: 1px solid var(--border);
-      background: #fff;
-      cursor: pointer;
-      display: grid;
-      place-items: center;
-    }
-
-    .bus-list { display: grid; gap: 10px; }
-    .bus-list-item { padding: 14px; border-radius: 15px; border: 1px solid var(--border); background: #fbfdff; display: grid; gap: 8px; }
-    .bus-list-item-head { display: flex; justify-content: space-between; gap: 10px; align-items: flex-start; }
-
-    .footer-note { margin-top: 18px; color: var(--muted); font-size: 12px; text-align: center; }
-    .toast { position: fixed; right: 24px; bottom: 24px; background: #0f172a; color: #fff; border-radius: 14px; padding: 13px 16px; box-shadow: 0 20px 40px rgba(15, 23, 42, 0.25); transform: translateY(20px); opacity: 0; pointer-events: none; transition: 0.25s ease; z-index: 50; }
-    .toast.show { transform: translateY(0); opacity: 1; }
-    .modal { position: fixed; inset: 0; background: rgba(15, 23, 42, 0.46); display: none; place-items: center; padding: 18px; z-index: 40; }
+    /* MODAL */
+    .modal { position: fixed; inset: 0; background: rgba(15, 23, 42, 0.6); backdrop-filter: blur(4px); display: none; place-items: center; padding: 20px; z-index: 50; }
     .modal.show { display: grid; }
-    .modal-content { width: min(780px, 100%); background: #fff; border-radius: 22px; overflow: hidden; max-height: 92vh; overflow-y: auto; }
-    .modal-header { padding: 22px; background: linear-gradient(135deg, var(--primary), #1898e8); color: #fff; display: flex; justify-content: space-between; }
-    .modal-body { padding: 22px; display: grid; grid-template-columns: repeat(2, 1fr); gap: 14px; }
-    .login-body { padding: 22px; display: grid; gap: 14px; }
-    .close { border: none; background: rgba(255, 255, 255, 0.16); color: #fff; width: 36px; height: 36px; border-radius: 12px; cursor: pointer; }
+    .modal-content { width: min(400px, 100%); background: #fff; border-radius: 20px; overflow: hidden; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.25); animation: popUp 0.3s ease-out; }
+    @keyframes popUp { from { transform: scale(0.95); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+    .modal-header { padding: 20px 24px; background: var(--primary); color: #fff; display: flex; justify-content: space-between; align-items: center; }
+    .modal-header h3 { font-size: 18px; font-weight: 700; }
+    .close { background: rgba(255,255,255,0.2); border: none; color: #fff; width: 32px; height: 32px; border-radius: 8px; cursor: pointer; }
+    .login-body { padding: 24px; display: grid; gap: 16px; }
 
+    /* ADMIN MODE */
     .admin-only { display: none; }
     .admin-mode .admin-only { display: block; }
     .admin-mode .row-actions.admin-only { display: flex; }
     body:not(.admin-mode) .layout { grid-template-columns: 1fr; }
+    .bus-list { display: grid; gap: 12px; }
+    .bus-list-item { padding: 16px; border-radius: 12px; border: 1px solid var(--border); background: #f8fafc; display: flex; justify-content: space-between; align-items: center; }
 
-    @media (max-width: 1240px) {
+    /* ================= RESPONSIVE MEDIA QUERIES (ANTI HANCUR) ================= */
+    
+    /* UNTUK TABLET & IPAD */
+    @media (max-width: 1100px) {
       .app { grid-template-columns: 1fr; }
-      .sidebar, .sidebar-note { display: none; }
+      
+      /* Sidebar berubah jadi Header Atas */
+      .sidebar {
+        height: auto;
+        padding: 16px 24px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        position: relative;
+      }
+      .brand { margin-bottom: 0; }
+      .brand-logo { width: 40px; height: 40px; font-size: 20px; }
+      .sidebar-note, .nav-label { display: none; }
+      .nav-item { margin-bottom: 0; padding: 10px 14px; }
+      
       body:not(.admin-mode) .layout { grid-template-columns: 1fr; }
-      .toolbar { grid-template-columns: 1fr 1fr; }
+      .layout { grid-template-columns: 1fr; } /* Admin form pindah ke atas tabel pada layar kecil */
+    }
+
+    /* UNTUK SMARTPHONE (IPHONE / ANDROID) */
+    @media (max-width: 768px) {
+      main { padding: 16px; }
+      .topbar { flex-direction: column; align-items: flex-start; gap: 16px; }
+      .top-actions { width: 100%; justify-content: space-between; }
+      
+      .stats { grid-template-columns: 1fr 1fr; } /* 2 Kolom di HP */
+      
+      /* Merubah kolom sejajar menjadi bertumpuk ke bawah di layar kecil */
+      .two-col, .three-col { grid-template-columns: 1fr; gap: 12px; }
+      .toolbar { grid-template-columns: 1fr; gap: 12px; }
+      
+      .bus-head { padding: 16px; }
+      .bus-meta { flex-direction: column; align-items: flex-start; gap: 8px; }
+      
+      .card-header h3 { font-size: 16px; }
+      .stat-card { padding: 16px; }
+      .stat-card strong { font-size: 24px; }
     }
   </style>
 </head>
@@ -582,73 +396,56 @@
       <div class="brand">
         <div class="brand-logo">🚌</div>
         <div>
-          <h1>Pemulangan Santri<br />Lirboyo Indramayu</h1>
-          <p>Manifest bus dan titik turun santri</p>
+          <h1>Pemulangan Santri</h1>
+          <p>Lirboyo Indramayu</p>
         </div>
       </div>
-      <div class="nav-label">Menu Utama</div>
-      <div class="nav-item active">🚌 Data Per Bus</div>
+      <div class="nav-item active">Manifest Bus</div>
       <div class="sidebar-note">
-        <strong>Akses Sistem</strong>
-        <span>Live Search & Tracking Aktif untuk Seluruh Pengunjung. Tambah/Edit data hanya untuk Admin.</span>
+        <strong>Akses Sistem Live</strong>
+        <span>Tracking & pencarian aktif untuk semua wali santri.</span>
       </div>
     </aside>
 
     <main>
       <section class="topbar">
         <div class="title-block">
-          <h2>Info Pemulangan Santri Berbasis Bus</h2>
-          <p>Data manifest bus real-time terintegrasi Cloud Database.</p>
+          <h2>Dashboard Manifest</h2>
+          <p>Pantau status kepulangan santri secara real-time</p>
         </div>
         <div class="top-actions">
           <span class="date-pill" id="currentDate">Hari ini</span>
           <span class="admin-pill" id="adminStatus">Mode Pengunjung</span>
-          <button class="btn btn-primary" id="loginBtn">🔐 Masuk Admin</button>
-          <button class="btn btn-danger admin-only" id="logoutBtn">Keluar Admin</button>
+          <button class="btn btn-primary" id="loginBtn">🔐 Admin</button>
+          <button class="btn btn-danger admin-only" id="logoutBtn">Keluar</button>
         </div>
       </section>
 
       <section class="stats">
-        <div class="stat-card" style="border-left: 5px solid #0f63c9;">
-          <span>🚌 Total Bus</span>
-          <strong id="dashTotalBus">0</strong>
+        <div class="stat-card" style="border-top: 4px solid #0f63c9;">
+          <span>Total Bus</span><strong id="dashTotalBus">0</strong>
         </div>
-        <div class="stat-card" style="border-left: 5px solid #475569;">
-          <span>👥 Total Santri</span>
-          <strong id="dashTotalSantri">0</strong>
+        <div class="stat-card" style="border-top: 4px solid #64748b;">
+          <span>Total Santri</span><strong id="dashTotalSantri">0</strong>
         </div>
-        <div class="stat-card" style="border-left: 5px solid #16a34a;">
-          <span>🟢 Sudah Naik</span>
-          <strong id="dashSudahNaik">0</strong>
+        <div class="stat-card" style="border-top: 4px solid #16a34a;">
+          <span>Sudah Naik</span><strong id="dashSudahNaik">0</strong>
         </div>
-        <div class="stat-card" style="border-left: 5px solid #dc2626;">
-          <span>⏳ Belum Naik</span>
-          <strong id="dashBelumNaik">0</strong>
+        <div class="stat-card" style="border-top: 4px solid #dc2626;">
+          <span>Belum Naik</span><strong id="dashBelumNaik">0</strong>
         </div>
-        <div class="stat-card" style="border-left: 5px solid #a855f7;">
-          <span>📍 Titik Turun</span>
-          <strong id="dashTitikTurun">0</strong>
+        <div class="stat-card" style="border-top: 4px solid #8b5cf6;">
+          <span>Titik Turun</span><strong id="dashTitikTurun">0</strong>
         </div>
-        <div class="stat-card" style="border-left: 5px solid #0284c7;">
-          <span>🔵 Bus Berangkat</span>
-          <strong id="dashBusBerangkat">0</strong>
-        </div>
-        <div class="stat-card" style="border-left: 5px solid #eab308;">
-          <span>🟡 Bus Menunggu</span>
-          <strong id="dashBusMenunggu">0</strong>
-        </div>
-        <div class="stat-card" style="border-left: 5px solid #64748b;">
-          <span>⚪ Bus Selesai</span>
-          <strong id="dashBusSelesai">0</strong>
+        <div class="stat-card" style="border-top: 4px solid #0ea5e9;">
+          <span>Bus Berangkat</span><strong id="dashBusBerangkat">0</strong>
         </div>
       </section>
 
       <section class="layout">
         <aside class="admin-column admin-only">
           <article class="card form-card">
-            <div class="card-header">
-              <h3 id="busFormTitle">Kelola Data Bus</h3>
-            </div>
+            <div class="card-header"><h3 id="busFormTitle">Kelola Bus</h3></div>
             <form id="busForm">
               <input type="hidden" id="editBusId" />
               <div class="two-col">
@@ -662,29 +459,29 @@
               <div class="field"><label>Titik Kumpul</label><input type="text" id="titikKumpul" required /></div>
               <div class="two-col">
                 <div class="field"><label>Koordinator</label><input type="text" id="koordinatorBus" required /></div>
-                <div class="field"><label>No HP Koordinator</label><input type="tel" id="telpKoordinator" /></div>
+                <div class="field"><label>No HP Koor</label><input type="tel" id="telpKoordinator" /></div>
               </div>
               <div class="two-col">
                 <div class="field">
-                  <label>Status Jalan Bus</label>
+                  <label>Status Perjalanan</label>
                   <select id="statusJalanBus">
                     <option value="Menunggu">🟡 Menunggu</option>
                     <option value="Berangkat">🔵 Berangkat</option>
                     <option value="Selesai">⚪ Selesai</option>
                   </select>
                 </div>
-                <div class="field"><label>Link Live GPS / WA ShareLoc</label><input type="url" id="linkGpsBus" placeholder="https://maps.google.com/..." /></div>
+                <div class="field"><label>Link ShareLoc (GPS)</label><input type="url" id="linkGpsBus" placeholder="https://maps.app.goo.gl/..." /></div>
               </div>
-              <div class="field"><label>Catatan Bus</label><textarea id="catatanBus"></textarea></div>
+              <div class="field"><label>Catatan</label><textarea id="catatanBus"></textarea></div>
               <div class="actions">
-                <button type="submit" class="btn btn-primary" id="saveBusBtn">💾 Simpan Bus</button>
-                <button type="button" class="btn btn-secondary" id="resetBusBtn">↺ Reset</button>
+                <button type="submit" class="btn btn-primary" id="saveBusBtn">Simpan Bus</button>
+                <button type="button" class="btn btn-secondary" id="resetBusBtn">Reset</button>
               </div>
             </form>
           </article>
 
           <article class="card form-card">
-            <div class="card-header"><h3 id="santriFormTitle">Kelola Santri</h3></div>
+            <div class="card-header"><h3 id="santriFormTitle">Tambah Santri</h3></div>
             <form id="santriForm">
               <input type="hidden" id="editSantriId" />
               <div class="field"><label>Nama Lengkap</label><input type="text" id="nama" required /></div>
@@ -700,7 +497,7 @@
                 </div>
               </div>
               <div class="three-col">
-                <div class="field"><label>Masuk Bus</label><select id="busId" required></select></div>
+                <div class="field"><label>Pilih Bus</label><select id="busId" required></select></div>
                 <div class="field"><label>No Kursi</label><input type="text" id="nomorKursi" /></div>
                 <div class="field"><label>Rombongan</label><input type="text" id="rombongan" /></div>
               </div>
@@ -708,14 +505,10 @@
                 <div class="field"><label>Titik Turun</label><input type="text" id="titikTurun" required /></div>
                 <div class="field"><label>Kecamatan</label><input type="text" id="kecamatanTujuan" /></div>
               </div>
-              <div class="two-col">
-                <div class="field"><label>HP Santri</label><input type="tel" id="telpSantri" /></div>
-                <div class="field"><label>HP Wali</label><input type="tel" id="telpWali" /></div>
-              </div>
-              <div class="field"><label>Alamat Tujuan</label><textarea id="alamatTujuan"></textarea></div>
+              <div class="field"><label>Alamat Detail</label><textarea id="alamatTujuan"></textarea></div>
               <div class="actions">
-                <button type="submit" class="btn btn-primary" id="saveSantriBtn">💾 Simpan Santri</button>
-                <button type="button" class="btn btn-secondary" id="resetSantriBtn">↺ Reset</button>
+                <button type="submit" class="btn btn-primary" id="saveSantriBtn">Simpan Santri</button>
+                <button type="button" class="btn btn-secondary" id="resetSantriBtn">Reset</button>
               </div>
             </form>
           </article>
@@ -730,7 +523,7 @@
           <div class="toolbar">
             <div class="search-wrap">
               <span class="search-icon">🔎</span>
-              <input type="search" id="searchInput" placeholder="Ketik nama untuk mencari langsung..." />
+              <input type="search" id="searchInput" placeholder="Cari nama/NIS..." />
             </div>
             <select id="filterBus"><option value="Semua">Semua Bus</option></select>
             <select id="filterTitik"><option value="Semua">Semua Titik Turun</option></select>
@@ -744,22 +537,23 @@
           <div class="bus-groups" id="busGroups"></div>
         </article>
       </section>
-
-      <p class="footer-note">©Forda2026</p>
+      
+      <p style="text-align:center; margin-top: 30px; font-size: 13px; color: var(--muted); font-weight:600;">© Forda Lirboyo Indramayu 2026</p>
     </main>
   </div>
 
   <div class="modal" id="loginModal">
-    <div class="modal-content" style="width:min(460px,100%);">
-      <div class="modal-header"><h3>Masuk Admin</h3><button class="close" id="closeLogin">×</button></div>
+    <div class="modal-content">
+      <div class="modal-header"><h3>Akses Admin</h3><button class="close" id="closeLogin">✕</button></div>
       <div class="login-body">
-        <div class="field"><label>Password Admin</label><input type="password" id="adminPassword" /></div>
-        <button class="btn btn-primary" id="submitLogin">Masuk</button>
+        <div class="field">
+          <label>Masukkan Password</label>
+          <input type="password" id="adminPassword" placeholder="••••••••" />
+        </div>
+        <button class="btn btn-primary" id="submitLogin" style="width:100%;">Masuk Sistem</button>
       </div>
     </div>
   </div>
-
-  <div class="toast" id="toast">Sukses</div>
 
   <script>
     const ADMIN_PASSWORD = "Lirboyo1910";
@@ -778,10 +572,9 @@
     const filterStatus = document.getElementById("filterStatus");
     const busGroups = document.getElementById("busGroups");
     const adminBusList = document.getElementById("adminBusList");
-    const toast = document.getElementById("toast");
 
     const busFields = ["nomorBus", "kapasitasBus", "tanggalPulang", "jamKumpul", "titikKumpul", "koordinatorBus", "telpKoordinator", "catatanBus"];
-    const santriFields = ["nama", "nis", "status", "busId", "nomorKursi", "rombongan", "titikTurun", "kecamatanTujuan", "telpSantri", "telpWali", "alamatTujuan"];
+    const santriFields = ["nama", "nis", "status", "busId", "nomorKursi", "rombongan", "titikTurun", "kecamatanTujuan", "alamatTujuan"];
 
     document.getElementById("currentDate").textContent = new Intl.DateTimeFormat("id-ID", {
       weekday: "long", day: "2-digit", month: "long", year: "numeric"
@@ -802,7 +595,7 @@
         filteredSantri = [...santri];
         renderAll();
       } catch (error) {
-        showToast("Gagal mengambil data dari database cloud.");
+        alert("Koneksi ke database bermasalah. Pastikan internet lancar.");
       }
     }
 
@@ -815,7 +608,6 @@
       filteredSantri = santri.filter((item) => {
         const bus = getBus(item.busId);
         const searchable = [item.nama, item.nis, item.status, item.nomorKursi, item.titikTurun, bus?.nomorBus].map(normalize).join(" ");
-        
         return searchable.includes(keyword) && 
                (selectedBus === "Semua" || item.busId === selectedBus) &&
                (selectedTitik === "Semua" || item.titikTurun === selectedTitik) &&
@@ -825,16 +617,12 @@
 
     function renderStats() {
       const uniqueTitik = new Set(santri.map(item => normalize(item.titikTurun)).filter(Boolean));
-      
       document.getElementById("dashTotalBus").textContent = buses.length;
       document.getElementById("dashTotalSantri").textContent = santri.length;
       document.getElementById("dashSudahNaik").textContent = santri.filter(s => s.status === "Sudah Naik").length;
       document.getElementById("dashBelumNaik").textContent = santri.filter(s => s.status !== "Sudah Naik").length;
       document.getElementById("dashTitikTurun").textContent = uniqueTitik.size;
-      
       document.getElementById("dashBusBerangkat").textContent = buses.filter(b => b.statusJalanBus === "Berangkat").length;
-      document.getElementById("dashBusMenunggu").textContent = buses.filter(b => b.statusJalanBus === "Menunggu" || !b.statusJalanBus).length;
-      document.getElementById("dashBusSelesai").textContent = buses.filter(b => b.statusJalanBus === "Selesai").length;
     }
 
     function getStatusBadge(status) {
@@ -852,7 +640,7 @@
 
     function renderBusGroups() {
       if (!buses.length) {
-        busGroups.innerHTML = `<div class="empty" style="padding:20px;text-align:center;color:var(--muted)"><strong>Belum ada data bus di cloud.</strong></div>`;
+        busGroups.innerHTML = `<div style="padding:40px 20px;text-align:center;color:var(--muted);background:#f8fafc;border-radius:16px;"><strong>Belum ada data manifest bus</strong></div>`;
         return;
       }
 
@@ -861,38 +649,32 @@
 
       busGroups.innerHTML = visibleBuses.map((bus) => {
         const rows = filteredSantri.filter(s => s.busId === bus.id);
-        
         const trackingElement = bus.linkGpsBus 
-          ? `<a href="${bus.linkGpsBus}" target="_blank" class="tracking-btn">📍 Lacak GPS Perjalanan Bus</a>` 
-          : `<span style="font-size:12px;color:var(--muted)">📍 GPS Belum Diaktifkan Sopir</span>`;
+          ? `<a href="${bus.linkGpsBus}" target="_blank" class="tracking-btn">📍 Lacak Perjalanan (Live)</a>` 
+          : `<span style="font-size:12px;color:var(--muted);background:#f1f5f9;padding:6px 12px;border-radius:8px;">Titik GPS Nonaktif</span>`;
 
         return `
           <section class="bus-group">
             <div class="bus-head">
-              <div>
-                <h4>🚌 ${escapeHTML(bus.nomorBus)} <span style="font-size:14px;font-weight:normal;">(${getBusStatusIcon(bus.statusJalanBus)})</span></h4>
-                <p>Koordinator: <strong>${escapeHTML(bus.koordinatorBus)}</strong> | HP: ${escapeHTML(bus.telpKoordinator || "-")}</p>
-                <div class="bus-meta">
-                  <span class="meta-chip">📅 ${formatDate(bus.tanggalPulang)}</span>
-                  <span class="meta-chip">⏰ ${escapeHTML(bus.jamKumpul)}</span>
-                  <span class="meta-chip">📍 Kumpul: ${escapeHTML(bus.titikKumpul)}</span>
-                  ${trackingElement}
-                </div>
+              <h4>Bus ${escapeHTML(bus.nomorBus)} <span style="font-size:14px;font-weight:600;opacity:0.8;">(${getBusStatusIcon(bus.statusJalanBus)})</span></h4>
+              <p>Koor: <strong>${escapeHTML(bus.koordinatorBus)}</strong> | ${escapeHTML(bus.telpKoordinator || "-")}</p>
+              <div class="bus-meta">
+                <span class="meta-chip">⏰ ${escapeHTML(bus.jamKumpul)}</span>
+                <span class="meta-chip">📍 ${escapeHTML(bus.titikKumpul)}</span>
+                ${trackingElement}
               </div>
             </div>
             <div class="table-wrap">
               <table>
-                <thead>
-                  <tr><th>Kursi</th><th>Nama Santri</th><th>Titik Turun (Google Maps)</th><th>Status</th><th class="admin-only">Aksi</th></tr>
-                </thead>
+                <thead><tr><th>Kursi</th><th>Nama & NIS</th><th>Titik Turun (Maps)</th><th>Status</th><th class="admin-only">Aksi</th></tr></thead>
                 <tbody>
-                  ${rows.length === 0 ? `<tr><td colspan="5" style="text-align:center;color:var(--muted);padding:20px;">Belum ada santri di bus ini</td></tr>` : rows.map(item => `
+                  ${rows.length === 0 ? `<tr><td colspan="5" style="text-align:center;color:var(--muted);padding:30px;">Tidak ada santri di bus ini</td></tr>` : rows.map(item => `
                     <tr>
                       <td><span class="seat-chip">${escapeHTML(item.nomorKursi || "-")}</span></td>
-                      <td class="name-cell"><strong>${escapeHTML(item.nama)}</strong><small>NIS: ${item.nis}</small></td>
+                      <td class="name-cell"><strong>${escapeHTML(item.nama)}</strong><small>${item.nis}</small></td>
                       <td>
                         <a href="https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(item.titikTurun + ' Indramayu')}" target="_blank" class="maps-link">
-                          📍 <strong>${escapeHTML(item.titikTurun)}</strong>
+                          📍 ${escapeHTML(item.titikTurun)}
                         </a>
                       </td>
                       <td>${getStatusBadge(item.status)}</td>
@@ -912,10 +694,7 @@
       }).join("");
     }
 
-    searchInput.addEventListener("input", () => {
-      filterData();
-      renderBusGroups();
-    });
+    searchInput.addEventListener("input", () => { filterData(); renderBusGroups(); });
 
     busForm.addEventListener("submit", async (e) => {
       e.preventDefault();
@@ -926,14 +705,9 @@
       data.linkGpsBus = document.getElementById("linkGpsBus").value.trim();
 
       try {
-        const url = id ? `${DB_BASE_URL}/buses/${id}.json` : `${DB_BASE_URL}/buses.json`;
-        const response = await fetch(url, { method: id ? "PUT" : "POST", body: JSON.stringify(data) });
-        if (response.ok) {
-          showToast("Data bus berhasil disinkronkan ke Cloud.");
-          resetBusForm(); 
-          await loadOnlineData();
-        }
-      } catch { showToast("Gagal menyimpan ke database."); }
+        const response = await fetch(id ? `${DB_BASE_URL}/buses/${id}.json` : `${DB_BASE_URL}/buses.json`, { method: id ? "PUT" : "POST", body: JSON.stringify(data) });
+        if (response.ok) { alert("Data Bus Tersimpan!"); resetBusForm(); await loadOnlineData(); }
+      } catch { alert("Gagal menyimpan ke server."); }
     });
 
     santriForm.addEventListener("submit", async (e) => {
@@ -943,37 +717,27 @@
       const data = getFormData(santriFields);
 
       try {
-        const url = id ? `${DB_BASE_URL}/santri/${id}.json` : `${DB_BASE_URL}/santri.json`;
-        const response = await fetch(url, { method: id ? "PUT" : "POST", body: JSON.stringify(data) });
-        if (response.ok) {
-          showToast("Data santri berhasil disinkronkan ke Cloud.");
-          resetSantriForm(); 
-          await loadOnlineData();
-        }
-      } catch { showToast("Gagal menyimpan ke database."); }
+        const response = await fetch(id ? `${DB_BASE_URL}/santri/${id}.json` : `${DB_BASE_URL}/santri.json`, { method: id ? "PUT" : "POST", body: JSON.stringify(data) });
+        if (response.ok) { alert("Data Santri Tersimpan!"); resetSantriForm(); await loadOnlineData(); }
+      } catch { alert("Gagal menyimpan ke server."); }
     });
 
     function renderAll() { populateSelects(); filterData(); renderStats(); renderAdminBusList(); renderBusGroups(); }
     function getBus(id) { return buses.find(b => b.id === id) || null; }
     function normalize(t) { return String(t || "").toLowerCase().trim(); }
-    function escapeHTML(t) { return String(t || "").replaceAll("&","&amp;").replaceAll("<","&lt;").replaceAll(">","&gt;"); }
+    function escapeHTML(t) { return String(t || "").replaceAll("&","&").replaceAll("<","<").replaceAll(">",">"); }
     function formatDate(v) { if(!v) return "-"; return new Intl.DateTimeFormat("id-ID",{day:"2-digit",month:"long",year:"numeric"}).format(new Date(v+"T00:00:00")); }
-    function showToast(m) { toast.textContent = m; toast.classList.add("show"); setTimeout(() => toast.classList.remove("show"), 2200); }
-    function getFormData(f) { const d = {}; f.forEach(field => d[field] = document.getElementById(field).value.trim()); return d; }
-    function setFormData(f, d) { f.forEach(field => document.getElementById(field).value = d[field] || ""); }
+    function getFormData(f) { const d = {}; f.forEach(field => d[field] = document.getElementById(field)?.value.trim()); return d; }
+    function setFormData(f, d) { f.forEach(field => { if(document.getElementById(field)) document.getElementById(field).value = d[field] || ""; }); }
     function resetBusForm() { busForm.reset(); document.getElementById("editBusId").value = ""; }
     function resetSantriForm() { santriForm.reset(); document.getElementById("editSantriId").value = ""; }
 
     function populateSelects() {
       const sorted = [...buses].sort((a,b) => String(a.nomorBus).localeCompare(String(b.nomorBus), undefined, {numeric: true}));
-      filterBus.innerHTML = `<option value="Semua">Semua Bus</option>` + sorted.map(b => `<option value="${b.id}">${b.nomorBus}</option>`).join("");
-      
+      filterBus.innerHTML = `<option value="Semua">Semua Bus</option>` + sorted.map(b => `<option value="${b.id}">Bus ${b.nomorBus}</option>`).join("");
       const busSelect = document.getElementById("busId");
-      if (sorted.length > 0) {
-        busSelect.innerHTML = sorted.map(b => `<option value="${b.id}">Bus ${b.nomorBus} | Koor: ${b.koordinatorBus}</option>`).join("");
-      } else {
-        busSelect.innerHTML = `<option value="">Tambahkan bus dulu</option>`;
-      }
+      if (sorted.length > 0) busSelect.innerHTML = sorted.map(b => `<option value="${b.id}">Bus ${b.nomorBus}</option>`).join("");
+      else busSelect.innerHTML = `<option value="">Tambah bus dulu</option>`;
       
       const uniqueTitik = [...new Set(santri.map(s => s.titikTurun).filter(Boolean))].sort();
       filterTitik.innerHTML = `<option value="Semua">Semua Titik Turun</option>` + uniqueTitik.map(t => `<option value="${t}">${t}</option>`).join("");
@@ -982,12 +746,10 @@
     function renderAdminBusList() {
       adminBusList.innerHTML = buses.map(bus => `
         <div class="bus-list-item">
-          <div class="bus-list-item-head">
-            <strong>Bus ${escapeHTML(bus.nomorBus)}</strong>
-            <div>
-              <button class="icon-btn" onclick="editBus('${bus.id}')">✏️</button>
-              <button class="icon-btn" onclick="deleteBus('${bus.id}')">🗑</button>
-            </div>
+          <strong>Bus ${escapeHTML(bus.nomorBus)}</strong>
+          <div class="row-actions">
+            <button class="icon-btn" onclick="editBus('${bus.id}')" title="Edit">✏️</button>
+            <button class="icon-btn" onclick="deleteBus('${bus.id}')" title="Hapus">🗑</button>
           </div>
         </div>
       `).join("");
@@ -1004,7 +766,7 @@
     };
 
     window.deleteBus = async function(id) {
-      if(!confirm("Hapus bus ini?")) return;
+      if(!confirm("Hapus bus ini secara permanen?")) return;
       await fetch(`${DB_BASE_URL}/buses/${id}.json`, { method: "DELETE" });
       await loadOnlineData();
     };
@@ -1018,14 +780,14 @@
     };
 
     window.deleteSantri = async function(id) {
-      if(!confirm("Hapus santri ini?")) return;
+      if(!confirm("Hapus santri ini dari manifest?")) return;
       await fetch(`${DB_BASE_URL}/santri/${id}.json`, { method: "DELETE" });
       await loadOnlineData();
     };
 
     function applyAdminMode() {
       document.body.classList.toggle("admin-mode", isAdmin);
-      document.getElementById("adminStatus").textContent = isAdmin ? "Mode Admin" : "Mode Pengunjung";
+      document.getElementById("adminStatus").textContent = isAdmin ? "Mode Admin Aktif" : "Mode Pengunjung";
       document.getElementById("loginBtn").style.display = isAdmin ? "none" : "inline-flex";
     }
 
@@ -1035,7 +797,9 @@
     document.getElementById("submitLogin").addEventListener("click", () => {
       if(document.getElementById("adminPassword").value === ADMIN_PASSWORD) {
         isAdmin = true; sessionStorage.setItem("pemulanganAdminMode", "true");
-        document.getElementById("loginModal").classList.remove("show"); applyAdminMode();
+        document.getElementById("loginModal").classList.remove("show"); 
+        document.getElementById("adminPassword").value = "";
+        applyAdminMode();
       } else { alert("Password salah!"); }
     });
 
