@@ -4,174 +4,264 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
   <title>Pemulangan Santri Lirboyo Indramayu Berbasis Bus</title>
+  
+  <link rel="icon" type="image/png" href="Jadi.png" />
+  <link rel="apple-touch-icon" href="Jadi.png" />
+  <meta name="mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+  <meta name="theme-color" content="#1e40af" />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+
   <style>
     :root {
-      --primary: #0f63c9;
-      --primary-dark: #084a9b;
-      --primary-soft: #eaf3ff;
-      --blue-50: #eff6ff;
-      --text: #172033;
-      --muted: #64748b;
-      --border: #e2e8f0;
-      --bg: #f4f7fb;
-      --card: #ffffff;
-      --shadow-sm: 0 2px 12px rgba(15, 99, 201, 0.06);
-      --shadow: 0 12px 30px rgba(15, 99, 201, 0.12);
-      --radius: 16px;
+      /* Palette Warna Profesional */
+      --primary: #2563eb;       /* Biru modern */
+      --primary-dark: #1e40af;
+      --primary-soft: #dbeafe;
+      --text-main: #0f172a;     /* Slate 900 */
+      --text-muted: #64748b;    /* Slate 500 */
+      --border: #e2e8f0;        /* Slate 200 */
+      --bg-body: #f8fafc;       /* Slate 50 */
+      --bg-card: #ffffff;
+      
+      /* Elevasi & Sudut */
+      --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
+      --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+      --shadow-lg: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+      --radius-sm: 8px;
+      --radius-md: 12px;
+      --radius-lg: 16px;
     }
 
     * { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', system-ui, sans-serif; }
 
     body {
       min-height: 100vh;
-      color: var(--text);
-      background: var(--bg);
+      color: var(--text-main);
+      background: var(--bg-body);
       background-image: 
-        radial-gradient(circle at top left, rgba(56, 189, 248, 0.1), transparent 40rem),
-        radial-gradient(circle at top right, rgba(15, 99, 201, 0.08), transparent 40rem);
+        radial-gradient(circle at top left, rgba(37, 99, 235, 0.04), transparent 40rem),
+        radial-gradient(circle at top right, rgba(37, 99, 235, 0.02), transparent 40rem);
       -webkit-font-smoothing: antialiased;
+      line-height: 1.5;
     }
 
     .app { display: grid; grid-template-columns: 280px 1fr; min-height: 100vh; }
 
-    /* SIDEBAR */
-    .sidebar { background: linear-gradient(180deg, var(--primary), var(--primary-dark)); color: #fff; padding: 32px 24px; position: sticky; top: 0; height: 100vh; overflow-y: auto; z-index: 20; box-shadow: 4px 0 24px rgba(0,0,0,0.1); }
-    .brand { display: flex; gap: 14px; align-items: center; margin-bottom: 40px; }
+    /* ================= SIDEBAR ================= */
+    .sidebar { 
+      background: linear-gradient(180deg, #1e3a8a, #1e40af); 
+      color: #fff; 
+      padding: 32px 24px; 
+      position: sticky; 
+      top: 0; 
+      height: 100vh; 
+      overflow-y: auto; 
+      z-index: 20; 
+      box-shadow: 4px 0 24px rgba(0,0,0,0.05); 
+    }
     
-    .brand-logo-img { width: 56px; height: 56px; border-radius: 14px; object-fit: contain; background: #fff; padding: 2px; box-shadow: 0 8px 16px rgba(0,0,0,0.15); }
-    
+    .brand { display: flex; gap: 16px; align-items: center; margin-bottom: 40px; }
+    .brand-logo-img { 
+      width: 52px; height: 52px; 
+      border-radius: var(--radius-md); 
+      object-fit: contain; 
+      background: #fff; padding: 2px; 
+      box-shadow: var(--shadow-md); 
+    }
     .brand h1 { font-size: 16px; line-height: 1.3; font-weight: 800; letter-spacing: 0.2px; }
-    .brand p { font-size: 12px; opacity: 0.8; margin-top: 4px; font-weight: 500; }
+    .brand p { font-size: 13px; opacity: 0.85; margin-top: 4px; font-weight: 400; }
     
-    .nav-item { display: flex; align-items: center; gap: 12px; padding: 14px 16px; border-radius: 12px; color: #fff; background: rgba(255, 255, 255, 0.15); font-weight: 600; font-size: 14px; margin-bottom: 8px; backdrop-filter: blur(4px); }
-    .sidebar-note { margin-top: 36px; padding: 18px; border-radius: 14px; background: rgba(255, 255, 255, 0.08); border: 1px solid rgba(255, 255, 255, 0.15); }
-    .sidebar-note strong { display: block; font-size: 13px; margin-bottom: 6px; }
+    .nav-item { 
+      display: flex; align-items: center; gap: 12px; padding: 14px 16px; 
+      border-radius: var(--radius-md); color: #fff; 
+      background: rgba(255, 255, 255, 0.1); 
+      font-weight: 600; font-size: 14px; margin-bottom: 8px; 
+      border: 1px solid rgba(255, 255, 255, 0.05);
+    }
+    
+    .sidebar-note { 
+      margin-top: 36px; padding: 18px; border-radius: var(--radius-md); 
+      background: rgba(0, 0, 0, 0.2); 
+      border: 1px solid rgba(255, 255, 255, 0.05); 
+    }
+    .sidebar-note strong { display: block; font-size: 13px; margin-bottom: 6px; color: #93c5fd; }
     .sidebar-note span { font-size: 12px; line-height: 1.6; opacity: 0.8; }
 
-    main { padding: 32px; overflow-x: hidden; max-width: 1440px; margin: 0 auto; width: 100%; }
+    /* ================= MAIN CONTENT ================= */
+    main { padding: 32px 40px; overflow-x: hidden; max-width: 1440px; margin: 0 auto; width: 100%; }
 
-    /* TOPBAR & TANGGAL EDITABLE */
+    /* TOPBAR */
     .topbar { display: flex; justify-content: space-between; gap: 20px; align-items: flex-end; margin-bottom: 32px; flex-wrap: wrap; }
-    .title-block h2 { font-size: clamp(24px, 4vw, 30px); font-weight: 800; color: var(--primary-dark); }
-    .title-block p { color: var(--muted); margin-top: 6px; font-size: 14px; }
-    .top-actions { display: flex; gap: 10px; align-items: center; flex-wrap: wrap; }
+    .title-block h2 { font-size: clamp(22px, 3vw, 28px); font-weight: 800; color: var(--text-main); letter-spacing: -0.5px; }
+    .title-block p { color: var(--text-muted); margin-top: 6px; font-size: 14px; font-weight: 500; }
+    .top-actions { display: flex; gap: 12px; align-items: center; flex-wrap: wrap; }
 
+    /* DATE & ADMIN PILLS */
     .date-wrap { position: relative; display: inline-block; }
-    .date-pill, .admin-pill { padding: 10px 18px; border-radius: 999px; background: var(--card); border: 1px solid var(--border); color: var(--text); font-weight: 700; font-size: 13px; box-shadow: var(--shadow-sm); display: inline-flex; align-items: center; }
+    .date-pill, .admin-pill { 
+      padding: 10px 18px; border-radius: 999px; background: var(--bg-card); 
+      border: 1px solid var(--border); color: var(--text-main); 
+      font-weight: 600; font-size: 13px; box-shadow: var(--shadow-sm); 
+      display: inline-flex; align-items: center; transition: 0.2s;
+    }
     .admin-pill.admin { background: #dcfce7; color: #166534; border-color: #bbf7d0; }
     
-    /* Input tanggal interaktif */
     #adminDateInput { position: absolute; top: 0; left: 0; width: 100%; height: 100%; opacity: 0; cursor: pointer; display: none; }
     .admin-mode #adminDateInput { display: block; }
     .admin-mode .date-wrap:hover .date-pill { border-color: var(--primary); color: var(--primary); background: var(--primary-soft); }
 
-    /* TOMBOL */
-    .btn { border: none; border-radius: 12px; padding: 12px 20px; font-weight: 700; cursor: pointer; transition: all 0.2s ease; display: inline-flex; align-items: center; justify-content: center; gap: 8px; font-size: 13px; min-height: 44px; }
-    .btn-primary { background: var(--primary); color: #fff; box-shadow: 0 8px 20px rgba(15, 99, 201, 0.25); }
-    .btn-primary:hover { background: var(--primary-dark); transform: translateY(-2px); box-shadow: 0 12px 24px rgba(15, 99, 201, 0.3); }
-    .btn-secondary { background: #f1f5f9; color: var(--text); border: 1px solid var(--border); }
+    /* BUTTONS */
+    .btn { 
+      border: none; border-radius: var(--radius-sm); padding: 10px 20px; 
+      font-weight: 600; cursor: pointer; transition: all 0.2s ease; 
+      display: inline-flex; align-items: center; justify-content: center; gap: 8px; 
+      font-size: 13px; min-height: 42px; 
+    }
+    .btn-primary { background: var(--primary); color: #fff; box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2); }
+    .btn-primary:hover { background: var(--primary-dark); transform: translateY(-1px); box-shadow: 0 6px 16px rgba(37, 99, 235, 0.3); }
+    .btn-secondary { background: #f1f5f9; color: var(--text-main); border: 1px solid var(--border); }
     .btn-secondary:hover { background: #e2e8f0; }
-    .btn-danger { background: #fee2e2; color: #b91c1c; border: 1px solid #fca5a5; }
+    .btn-danger { background: #fee2e2; color: #b91c1c; border: 1px solid #fecaca; }
     .btn-danger:hover { background: #ef4444; color: #fff; }
 
-    /* STATS */
+    /* STATS CARDS */
     .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(160px, 1fr)); gap: 16px; margin-bottom: 32px; }
-    .stat-card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); padding: 22px; box-shadow: var(--shadow-sm); transition: transform 0.2s ease; }
-    .stat-card:hover { transform: translateY(-3px); box-shadow: var(--shadow); }
-    .stat-card span { color: var(--muted); font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px; display: block; }
-    .stat-card strong { font-size: 30px; color: var(--primary-dark); font-weight: 900; line-height: 1; }
+    .stat-card { 
+      background: var(--bg-card); border: 1px solid var(--border); 
+      border-radius: var(--radius-md); padding: 20px; 
+      box-shadow: var(--shadow-sm); transition: 0.2s ease; 
+    }
+    .stat-card:hover { transform: translateY(-2px); box-shadow: var(--shadow-md); border-color: #cbd5e1; }
+    .stat-card span { color: var(--text-muted); font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; margin-bottom: 8px; display: block; }
+    .stat-card strong { font-size: 28px; color: var(--text-main); font-weight: 800; line-height: 1; }
 
-    /* FORM & KARTU */
-    .layout { display: grid; grid-template-columns: 380px 1fr; gap: 24px; align-items: start; }
-    .card { background: var(--card); border: 1px solid var(--border); border-radius: var(--radius); box-shadow: var(--shadow-sm); overflow: hidden; }
-    .form-card { padding: 26px; }
-    .card-header { margin-bottom: 22px; padding-bottom: 16px; border-bottom: 1px dashed var(--border); }
-    .card-header h3 { font-size: 18px; color: var(--primary-dark); font-weight: 800; }
+    /* CARD LAYOUTS */
+    .layout { display: grid; grid-template-columns: 360px 1fr; gap: 24px; align-items: start; }
+    .card { background: var(--bg-card); border: 1px solid var(--border); border-radius: var(--radius-lg); box-shadow: var(--shadow-sm); overflow: hidden; }
+    .form-card { padding: 24px; }
+    .card-header { margin-bottom: 20px; padding-bottom: 16px; border-bottom: 1px solid var(--border); }
+    .card-header h3 { font-size: 17px; color: var(--text-main); font-weight: 700; }
 
+    /* FORMS */
     form { display: grid; gap: 16px; }
-    .field { display: grid; gap: 8px; }
-    label { color: var(--muted); font-size: 12px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.5px; }
+    .field { display: grid; gap: 6px; }
+    label { color: var(--text-muted); font-size: 12px; font-weight: 600; text-transform: uppercase; letter-spacing: 0.5px; }
     
-    input, select, textarea { width: 100%; padding: 14px 16px; border-radius: 12px; border: 1px solid var(--border); background: #f8fafc; color: var(--text); font-size: 14px; font-weight: 500; transition: all 0.2s; }
-    input:focus, select:focus, textarea:focus { background: #fff; border-color: var(--primary); box-shadow: 0 0 0 4px var(--primary-soft); outline: none; }
+    input, select, textarea { 
+      width: 100%; padding: 12px 14px; border-radius: var(--radius-sm); 
+      border: 1px solid var(--border); background: #f8fafc; color: var(--text-main); 
+      font-size: 14px; font-weight: 500; transition: all 0.2s; 
+    }
+    input:focus, select:focus, textarea:focus { 
+      background: #fff; border-color: var(--primary); 
+      box-shadow: 0 0 0 3px var(--primary-soft); outline: none; 
+    }
     textarea { min-height: 80px; resize: vertical; }
-    
-    .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
-    .actions { display: flex; gap: 12px; margin-top: 8px; }
+    .two-col { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; }
+    .actions { display: flex; gap: 10px; margin-top: 8px; }
     .actions .btn-primary { flex: 1; }
 
-    /* TABEL & PENCARIAN */
-    .toolbar { padding: 22px; border-bottom: 1px solid var(--border); display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 14px; background: #fafbfc; }
+    /* DATA TABLES & TOOLBAR */
+    .toolbar { padding: 20px 24px; border-bottom: 1px solid var(--border); display: grid; grid-template-columns: 1.5fr 1fr 1fr 1fr; gap: 12px; background: #fafbfc; }
     .search-wrap { position: relative; }
-    .search-wrap input { padding-left: 46px; background: #fff; }
-    .search-icon { position: absolute; left: 18px; top: 50%; transform: translateY(-50%); font-size: 16px; }
+    .search-wrap input { padding-left: 42px; background: #fff; }
+    .search-icon { position: absolute; left: 16px; top: 50%; transform: translateY(-50%); font-size: 16px; opacity: 0.5; }
 
-    .bus-groups { padding: 24px; display: grid; gap: 24px; }
-    .bus-group { border: 1px solid var(--border); border-radius: var(--radius); overflow: hidden; background: #fff; box-shadow: 0 4px 15px rgba(0,0,0,0.03); }
-    .bus-head { padding: 22px; background: linear-gradient(135deg, #f8fafc, #f1f5f9); border-bottom: 1px solid var(--border); }
-    .bus-title h4 { font-size: 19px; color: var(--primary-dark); font-weight: 800; margin-bottom: 6px; }
-    .bus-meta { display: flex; gap: 10px; flex-wrap: wrap; margin-top: 14px; }
-    .meta-chip { padding: 8px 14px; border-radius: 10px; background: #fff; border: 1px solid var(--border); font-size: 12px; font-weight: 700; color: var(--text); box-shadow: 0 2px 4px rgba(0,0,0,0.02); }
+    .bus-groups { padding: 24px; display: grid; gap: 24px; background: #f8fafc; }
+    .bus-group { border: 1px solid var(--border); border-radius: var(--radius-md); overflow: hidden; background: #fff; box-shadow: var(--shadow-sm); }
+    .bus-head { padding: 20px 24px; background: #ffffff; border-bottom: 1px solid var(--border); }
+    .bus-title h4 { font-size: 18px; color: var(--text-main); font-weight: 800; margin-bottom: 6px; }
+    .bus-meta { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 12px; }
+    .meta-chip { 
+      padding: 6px 12px; border-radius: 6px; background: var(--bg-body); 
+      border: 1px solid var(--border); font-size: 12px; font-weight: 600; color: var(--text-muted); 
+    }
 
-    .maps-link { color: var(--primary); font-weight: 700; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; }
+    .maps-link { color: var(--primary); font-weight: 600; text-decoration: none; display: inline-flex; align-items: center; gap: 6px; }
     .maps-link:hover { color: var(--primary-dark); text-decoration: underline; }
-    .tracking-btn { background: var(--primary); color: white; padding: 8px 14px; border-radius: 10px; text-decoration: none; font-size: 12px; font-weight: 700; box-shadow: 0 4px 10px rgba(15, 99, 201, 0.3); transition: 0.2s; }
-    .tracking-btn:hover { background: var(--primary-dark); transform: translateY(-1px); }
+    .tracking-btn { 
+      background: var(--primary-soft); color: var(--primary-dark); padding: 6px 12px; 
+      border-radius: 6px; text-decoration: none; font-size: 12px; font-weight: 700; transition: 0.2s; 
+    }
+    .tracking-btn:hover { background: var(--primary); color: #fff; }
 
     .table-wrap { overflow-x: auto; -webkit-overflow-scrolling: touch; }
     table { width: 100%; border-collapse: collapse; min-width: 750px; }
-    th { text-align: left; background: #fff; padding: 18px; font-size: 12px; font-weight: 800; color: var(--muted); text-transform: uppercase; letter-spacing: 0.5px; border-bottom: 2px solid var(--border); }
-    td { padding: 18px; border-bottom: 1px solid #f1f5f9; font-size: 14px; vertical-align: middle; }
-    tbody tr:hover { background: var(--bg); }
+    th { 
+      text-align: left; background: #f8fafc; padding: 14px 24px; font-size: 12px; 
+      font-weight: 700; color: var(--text-muted); text-transform: uppercase; 
+      letter-spacing: 0.5px; border-bottom: 1px solid var(--border); 
+    }
+    td { padding: 16px 24px; border-bottom: 1px solid #f1f5f9; font-size: 14px; vertical-align: middle; color: var(--text-main); }
+    tbody tr:hover { background: #f8fafc; }
+    tbody tr:last-child td { border-bottom: none; }
     
-    .name-cell strong { display: block; color: var(--text); font-size: 15px; font-weight: 700; margin-bottom: 4px; }
-    .seat-chip { display: grid; place-items: center; width: 44px; height: 34px; border-radius: 10px; background: var(--primary-soft); color: var(--primary-dark); font-weight: 800; font-size: 13px; }
+    .name-cell strong { display: block; color: var(--text-main); font-size: 14px; font-weight: 700; margin-bottom: 2px; }
+    .seat-chip { display: grid; place-items: center; width: 36px; height: 36px; border-radius: 8px; background: #f1f5f9; color: var(--text-muted); font-weight: 700; font-size: 13px; }
     
-    .badge-status { display: inline-flex; padding: 8px 14px; border-radius: 999px; font-size: 12px; font-weight: 800; }
+    .badge-status { display: inline-flex; padding: 6px 12px; border-radius: 999px; font-size: 12px; font-weight: 700; }
     .badge-status.naik { background: #dcfce7; color: #166534; }
     .badge-status.konfirmasi { background: #fef3c7; color: #b45309; }
     .badge-status.terdata { background: #fee2e2; color: #b91c1c; }
 
-    .icon-btn { width: 38px; height: 38px; border-radius: 12px; border: 1px solid var(--border); background: #fff; cursor: pointer; display: grid; place-items: center; transition: 0.2s; font-size: 16px; }
+    .icon-btn { width: 34px; height: 34px; border-radius: 8px; border: 1px solid var(--border); background: #fff; cursor: pointer; display: grid; place-items: center; transition: 0.2s; font-size: 14px; }
     .icon-btn:hover { background: #f1f5f9; border-color: #cbd5e1; }
-    .row-actions { display: flex; gap: 8px; }
+    .row-actions { display: flex; gap: 6px; }
 
     /* MODAL */
-    .modal { position: fixed; inset: 0; background: rgba(15, 23, 42, 0.6); backdrop-filter: blur(5px); display: none; place-items: center; padding: 20px; z-index: 50; }
+    .modal { position: fixed; inset: 0; background: rgba(15, 23, 42, 0.7); backdrop-filter: blur(4px); display: none; place-items: center; padding: 20px; z-index: 100; }
     .modal.show { display: grid; }
-    .modal-content { width: min(420px, 100%); background: #fff; border-radius: 24px; overflow: hidden; box-shadow: 0 25px 50px -12px rgba(0,0,0,0.3); }
-    .modal-header { padding: 24px; background: var(--primary); color: #fff; display: flex; justify-content: space-between; align-items: center; }
-    .modal-header h3 { font-size: 20px; font-weight: 800; }
-    .close { background: rgba(255,255,255,0.2); border: none; color: #fff; width: 36px; height: 36px; border-radius: 10px; cursor: pointer; font-size: 18px; font-weight: bold; }
-    .login-body { padding: 30px 24px; display: grid; gap: 20px; }
+    .modal-content { width: min(400px, 100%); background: #fff; border-radius: var(--radius-lg); overflow: hidden; box-shadow: var(--shadow-lg); }
+    .modal-header { padding: 24px; background: #fff; border-bottom: 1px solid var(--border); display: flex; justify-content: space-between; align-items: center; }
+    .modal-header h3 { font-size: 18px; font-weight: 800; color: var(--text-main); }
+    .close { background: #f1f5f9; border: none; color: var(--text-muted); width: 32px; height: 32px; border-radius: 8px; cursor: pointer; font-size: 16px; font-weight: bold; transition: 0.2s; }
+    .close:hover { background: #e2e8f0; color: var(--text-main); }
+    .login-body { padding: 24px; display: grid; gap: 20px; }
 
     /* ADMIN MODE */
     .admin-only { display: none; }
     .admin-mode .admin-only { display: block; }
     .admin-mode .row-actions.admin-only { display: flex; }
     body:not(.admin-mode) .layout { grid-template-columns: 1fr; }
-    .bus-list { display: grid; gap: 12px; }
-    .bus-list-item { padding: 18px; border-radius: 14px; border: 1px solid var(--border); background: #f8fafc; display: flex; justify-content: space-between; align-items: center; font-weight: 700; }
+    .bus-list { display: grid; gap: 10px; }
+    .bus-list-item { padding: 14px 16px; border-radius: var(--radius-sm); border: 1px solid var(--border); background: #f8fafc; display: flex; justify-content: space-between; align-items: center; font-weight: 600; font-size: 13px; }
 
     /* RESPONSIVE IPAD & HP */
     @media (max-width: 1100px) {
-      .app { grid-template-columns: 1fr; }
-      .sidebar { height: auto; padding: 20px 24px; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; z-index: 50;}
+      .app { grid-template-columns: 1fr; display: flex; flex-direction: column; }
+      
+      .sidebar { 
+        height: auto; 
+        padding: 24px 20px; 
+        display: flex; 
+        align-items: center; 
+        justify-content: space-between; 
+        flex-wrap: wrap; 
+        position: relative; 
+        z-index: 10;
+        border-radius: 0 0 20px 20px; 
+      }
+      
       .brand { margin-bottom: 0; }
-      .brand-logo-img { width: 44px; height: 44px; }
+      .brand-logo-img { width: 42px; height: 42px; }
       .sidebar-note, .nav-item { display: none; }
       .layout { grid-template-columns: 1fr; }
     }
+    
     @media (max-width: 768px) {
       main { padding: 20px 16px; }
       .topbar { flex-direction: column; align-items: flex-start; gap: 16px; }
-      .top-actions { width: 100%; justify-content: space-between; }
+      .top-actions { width: 100%; justify-content: flex-start; }
       .stats { grid-template-columns: 1fr 1fr; gap: 12px; }
       .stat-card { padding: 16px; }
       .stat-card strong { font-size: 24px; }
       .two-col, .toolbar { grid-template-columns: 1fr; gap: 12px; }
-      .bus-head { padding: 18px; }
-      .bus-meta { flex-direction: column; align-items: flex-start; gap: 10px; }
+      .bus-head { padding: 16px; }
+      .bus-meta { flex-direction: column; align-items: flex-start; gap: 8px; }
     }
   </style>
 </head>
@@ -205,20 +295,20 @@
           </div>
           
           <span class="admin-pill" id="adminStatus">Mode Pengunjung</span>
-          <button class="btn btn-danger admin-only" id="resetDbBtn" style="margin-right: 2px;">⚠️ Reset Database</button>
+          <button class="btn btn-danger admin-only" id="resetDbBtn" title="Reset Semua Data">⚠️ Reset DB</button>
           
-          <button class="btn btn-primary" id="loginBtn">🔐 Admin</button>
+          <button class="btn btn-primary" id="loginBtn">🔐 Akses Admin</button>
           <button class="btn btn-secondary admin-only" id="logoutBtn">Keluar</button>
         </div>
       </section>
 
       <section class="stats">
-        <div class="stat-card" style="border-left: 4px solid #0f63c9;"><span>Total Bus</span><strong id="dashTotalBus">0</strong></div>
-        <div class="stat-card" style="border-left: 4px solid #64748b;"><span>Total Santri</span><strong id="dashTotalSantri">0</strong></div>
-        <div class="stat-card" style="border-left: 4px solid #16a34a;"><span>Sudah Naik</span><strong id="dashSudahNaik">0</strong></div>
-        <div class="stat-card" style="border-left: 4px solid #dc2626;"><span>Belum Naik</span><strong id="dashBelumNaik">0</strong></div>
-        <div class="stat-card" style="border-left: 4px solid #8b5cf6;"><span>Titik Turun</span><strong id="dashTitikTurun">0</strong></div>
-        <div class="stat-card" style="border-left: 4px solid #0ea5e9;"><span>Bus Berangkat</span><strong id="dashBusBerangkat">0</strong></div>
+        <div class="stat-card" style="border-left: 3px solid #3b82f6;"><span>Total Bus</span><strong id="dashTotalBus">0</strong></div>
+        <div class="stat-card" style="border-left: 3px solid #64748b;"><span>Total Santri</span><strong id="dashTotalSantri">0</strong></div>
+        <div class="stat-card" style="border-left: 3px solid #22c55e;"><span>Sudah Naik</span><strong id="dashSudahNaik">0</strong></div>
+        <div class="stat-card" style="border-left: 3px solid #ef4444;"><span>Belum Naik</span><strong id="dashBelumNaik">0</strong></div>
+        <div class="stat-card" style="border-left: 3px solid #a855f7;"><span>Titik Turun</span><strong id="dashTitikTurun">0</strong></div>
+        <div class="stat-card" style="border-left: 3px solid #0ea5e9;"><span>Bus Berangkat</span><strong id="dashBusBerangkat">0</strong></div>
       </section>
 
       <section class="layout">
@@ -264,7 +354,7 @@
                     <option value="Selesai">⚪ Selesai</option>
                   </select>
                 </div>
-                <div class="field"><label>Link ShareLoc (GPS)</label><input type="url" id="linkGpsBus" placeholder="https://maps.google.com/..." /></div>
+                <div class="field"><label>Link ShareLoc (GPS)</label><input type="url" id="linkGpsBus" placeholder="http://maps.google.com/..." /></div>
               </div>
               <div class="field"><label>Catatan</label><textarea id="catatanBus"></textarea></div>
               <div class="actions">
@@ -367,19 +457,22 @@
         </article>
       </section>
       
-      <p style="text-align:center; margin-top: 36px; font-size: 13px; color: var(--muted); font-weight:700;">© Forda Indramayu 2026</p>
+      <p style="text-align:center; margin-top: 40px; font-size: 13px; color: var(--text-muted); font-weight:600;">© Forda Indramayu 2026</p>
     </main>
   </div>
 
   <div class="modal" id="loginModal">
     <div class="modal-content">
-      <div class="modal-header"><h3>Akses Admin</h3><button class="close" id="closeLogin">✕</button></div>
+      <div class="modal-header">
+        <h3>Login Sistem</h3>
+        <button class="close" id="closeLogin">✕</button>
+      </div>
       <div class="login-body">
         <div class="field">
-          <label>Masukkan Password</label>
-          <input type="password" id="adminPassword" placeholder="••••••••" />
+          <label>PIN Akses</label>
+          <input type="password" id="adminPassword" placeholder="••••••••" style="font-size: 18px; letter-spacing: 2px;" />
         </div>
-        <button class="btn btn-primary" id="submitLogin" style="width:100%;">Masuk Sistem</button>
+        <button class="btn btn-primary" id="submitLogin" style="width:100%;">Masuk</button>
       </div>
     </div>
   </div>
@@ -437,7 +530,6 @@
       }
     }
 
-    // LISTENER EDIT OPSI TANGGAL HARI TAHUN NYA
     adminDateInput.addEventListener("change", async (e) => {
       if(!isAdmin) return;
       if(e.target.value) {
@@ -473,10 +565,8 @@
 
     resetDbBtn.addEventListener("click", async () => {
       if(!isAdmin) return;
-      
       const confirm1 = confirm("⚠️ PERINGATAN! Anda akan menghapus SELURUH data bus dan data santri secara permanen dari server.\n\nApakah Anda yakin?");
       if(!confirm1) return;
-      
       const confirm2 = confirm("Konfirmasi Terakhir: Tindakan ini TIDAK BISA dibatalkan dan semua hitungan statistik akan kembali menjadi 0. Lanjutkan?");
       if(!confirm2) return;
       
@@ -485,12 +575,12 @@
           fetch(`${DB_BASE_URL}/buses.json`, { method: "DELETE" }),
           fetch(`${DB_BASE_URL}/santri.json`, { method: "DELETE" })
         ]);
-        alert("Database Berhasil Dikosongkan! Semua data angka diatur ulang menjadi 0.");
+        alert("Database Berhasil Dikosongkan!");
         resetBusForm();
         resetSantriForm();
         await loadOnlineData();
       } catch (err) {
-        alert("Gagal mengosongkan database. Periksa koneksi internet Anda.");
+        alert("Gagal mengosongkan database.");
       }
     });
 
@@ -535,7 +625,7 @@
 
     function renderBusGroups() {
       if (!buses.length) {
-        busGroups.innerHTML = `<div style="padding:50px 20px;text-align:center;color:var(--muted);background:#fff;border-radius:16px;border:1px dashed var(--border);"><strong>Belum ada data manifest bus</strong></div>`;
+        busGroups.innerHTML = `<div style="padding:50px 20px;text-align:center;color:var(--text-muted);background:#fff;border-radius:12px;border:1px dashed var(--border);"><strong>Belum ada data manifest bus</strong></div>`;
         return;
       }
 
@@ -546,24 +636,24 @@
         const rows = filteredSantri.filter(s => s.busId === bus.id);
         const trackingElement = bus.linkGpsBus 
           ? `<a href="${bus.linkGpsBus}" target="_blank" class="tracking-btn">📍 Live GPS</a>` 
-          : `<span style="font-size:12px;color:var(--muted);background:#f1f5f9;padding:8px 14px;border-radius:10px;font-weight:700;">GPS Offline</span>`;
+          : `<span style="font-size:11px;color:var(--text-muted);background:#f1f5f9;padding:6px 12px;border-radius:6px;font-weight:700;">GPS Offline</span>`;
 
         return `
           <section class="bus-group">
             <div class="bus-head">
               <h4>Bus ${escapeHTML(bus.nomorBus)} <span style="font-size:14px;font-weight:700;opacity:0.7;margin-left:6px;">(${getBusStatusIcon(bus.statusJalanBus)})</span></h4>
-              <p style="font-size:13px; color:var(--muted); margin-top:4px;">Koor: <strong>${escapeHTML(bus.koordinatorBus)}</strong> | HP: ${escapeHTML(bus.telpKoordinator || "-")}</p>
+              <p style="font-size:13px; color:var(--text-muted); margin-top:4px;">Koor: <strong>${escapeHTML(bus.koordinatorBus)}</strong> | HP: ${escapeHTML(bus.telpKoordinator || "-")}</p>
               <div class="bus-meta">
                 <span class="meta-chip">⏰ ${escapeHTML(bus.jamKumpul)}</span>
-                <span class="meta-chip">📍 Kumpul: ${escapeHTML(bus.titikKumpul)}</span>
+                <span class="meta-chip">📍 ${escapeHTML(bus.titikKumpul)}</span>
                 ${trackingElement}
               </div>
             </div>
             <div class="table-wrap">
               <table>
-                <thead><tr><th>Kursi</th><th>Nama Santri</th><th>Kecamatan</th><th>Titik Turun (Maps)</th><th>Status</th><th class="admin-only">Aksi</th></tr></thead>
+                <thead><tr><th>No</th><th>Nama Santri</th><th>Kecamatan</th><th>Titik Turun</th><th>Status</th><th class="admin-only">Aksi</th></tr></thead>
                 <tbody>
-                  ${rows.length === 0 ? `<tr><td colspan="6" style="text-align:center;color:var(--muted);padding:40px;">Belum ada santri terdaftar di bus ini</td></tr>` : rows.map(item => `
+                  ${rows.length === 0 ? `<tr><td colspan="6" style="text-align:center;color:var(--text-muted);padding:40px;">Belum ada santri terdaftar</td></tr>` : rows.map(item => `
                     <tr>
                       <td><span class="seat-chip">${escapeHTML(item.nomorKursi || "-")}</span></td>
                       <td class="name-cell"><strong>${escapeHTML(item.nama)}</strong></td>
@@ -641,7 +731,7 @@
     function renderAdminBusList() {
       adminBusList.innerHTML = buses.map(bus => `
         <div class="bus-list-item">
-          <span>Bus ${escapeHTML(bus.nomorBus)} <small>(${escapeHTML(bus.kapasitasBus)} Seat)</small></span>
+          <span>Bus ${escapeHTML(bus.nomorBus)} <small style="color:var(--text-muted)">(${escapeHTML(bus.kapasitasBus)} Seat)</small></span>
           <div class="row-actions">
             <button class="icon-btn" onclick="editBus('${bus.id}')" title="Edit">✏️</button>
             <button class="icon-btn" onclick="deleteBus('${bus.id}')" title="Hapus">🗑</button>
@@ -689,6 +779,7 @@
     document.getElementById("loginBtn").addEventListener("click", () => document.getElementById("loginModal").classList.add("show"));
     document.getElementById("closeLogin").addEventListener("click", () => document.getElementById("loginModal").classList.remove("show"));
     document.getElementById("logoutBtn").addEventListener("click", () => { isAdmin = false; sessionStorage.removeItem("pemulanganAdminMode"); applyAdminMode(); });
+    
     document.getElementById("submitLogin").addEventListener("click", () => {
       if(document.getElementById("adminPassword").value === ADMIN_PASSWORD) {
         isAdmin = true; sessionStorage.setItem("pemulanganAdminMode", "true");
